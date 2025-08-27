@@ -22,10 +22,15 @@ In your Cloudflare Pages project, add these environment variables:
 ```
 TURNSTILE_SITE_KEY=your_site_key_here
 TURNSTILE_SECRET_KEY=your_secret_key_here
-CLOUDFLARE_ACCOUNT_ID=your_account_id
 DESTINATION_EMAIL=austin@austincole.us
 FROM_EMAIL=noreply@austincole.us
-CLOUDFLARE_API_TOKEN=your_api_token
+```
+
+### Optional Variables
+
+```
+DKIM_DOMAIN=austincole.us
+DKIM_SELECTOR=mailchannels
 ```
 
 ### How to Add Environment Variables
@@ -47,22 +52,25 @@ With your actual site key:
 <div class="cf-turnstile" data-sitekey="your_actual_site_key_here" data-theme="auto"></div>
 ```
 
-## 4. Email Setup Options
+## 4. Email Setup
 
-### Option A: Cloudflare Email Routing (Recommended)
+### Using Cloudflare Email Workers + MailChannels (Recommended)
 
-1. Set up [Cloudflare Email Routing](https://developers.cloudflare.com/email-routing/)
-2. Add your domain and verify DNS records
-3. Create routing rules to forward to your personal email
-4. Get an API token with Email Routing permissions
+The contact form uses **MailChannels** (Cloudflare's email partner) to send emails. This integrates perfectly with your existing **Cloudflare Email Routing**.
 
-### Option B: External Email Service (Alternative)
+**How it works:**
+1. Contact form submits → Pages Function processes
+2. Function sends email via MailChannels API  
+3. Email appears in your inbox via Email Routing
 
-If Email Routing doesn't work, you can modify the `sendEmail` function in `functions/api/contact.js` to use:
-- SendGrid
-- Mailgun  
-- Postmark
-- SMTP
+**Requirements:**
+- ✅ Email Routing already set up on your domain
+- ✅ No API tokens needed
+- ✅ No additional configuration required
+
+**Optional DKIM Setup (for better deliverability):**
+1. Add DKIM records to your DNS (see Cloudflare Email docs)
+2. Set environment variables: `DKIM_DOMAIN` and `DKIM_SELECTOR`
 
 ## 5. Test the Setup
 
