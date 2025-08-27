@@ -130,6 +130,13 @@ Your content here...
 
 See `docs/TESTIMONIALS.md` for detailed instructions on gathering and adding testimonials to the website.
 
+### Contact Form Setup
+
+The site includes a contact form with Cloudflare Turnstile protection. See `docs/CONTACT-SETUP.md` for complete setup instructions including:
+- Turnstile configuration
+- Environment variables setup  
+- Email routing integration
+
 ### Updating Bio Information
 
 - Main bio content: Edit `src/about.njk`
