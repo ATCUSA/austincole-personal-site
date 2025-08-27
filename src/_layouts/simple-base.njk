@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if title %}{{ title }} - {% endif %}Austin Cole</title>
+    <meta name="description" content="{{ description or 'Austin Cole - Deputy IT Director, CISO, Emergency Management Leader, Ham Radio Operator, and ITDRC volunteer' }}">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <script>
+        // Default to dark mode unless light mode is explicitly set
+        if (localStorage.theme === 'light') {
+            document.documentElement.classList.remove('dark')
+        } else {
+            document.documentElement.classList.add('dark')
+        }
+    </script>
+</head>
+<body class="min-h-screen">
+    <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+        <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="/" class="text-xl font-bold text-gray-900 dark:text-gray-100">
+                        Austin Cole
+                    </a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="nav-link {% if page.url == '/' %}active{% endif %}">Home</a>
+                    <a href="/about/" class="nav-link {% if '/about/' in page.url %}active{% endif %}">About</a>
+                    <a href="/testimonials/" class="nav-link {% if '/testimonials/' in page.url %}active{% endif %}">Testimonials</a>
+                    <a href="/blog/" class="nav-link {% if '/blog/' in page.url %}active{% endif %}">Blog</a>
+                    
+                    <button id="theme-toggle" class="p-2 rounded-lg text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
+                        <span class="dark:hidden">☀️</span>
+                        <span class="hidden dark:inline">🌙</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-1">
+        {{ content | safe }}
+    </main>
+
+    <footer class="bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-gray-600 dark:text-gray-300">
+                    © 2024 Austin Cole. All rights reserved.
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="https://github.com/ATCUSA" class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 transition-colors duration-200" target="_blank" rel="noopener">
+                        GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/austintcole/" class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 transition-colors duration-200" target="_blank" rel="noopener">
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.removeItem('theme'); // Remove to default back to dark
+            }
+        }
+
+        themeToggle?.addEventListener('click', toggleTheme);
+    </script>
+</body>
+</html>

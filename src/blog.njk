@@ -1,0 +1,94 @@
+---
+layout: simple-base.njk
+title: Blog
+description: Austin Cole's thoughts on technology, cybersecurity, emergency management, ham radio, and more.
+---
+
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Header -->
+    <header class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+            Blog
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300">
+            Thoughts on technology, cybersecurity, emergency management, and more
+        </p>
+    </header>
+
+    {% set posts = collections.posts %}
+    {% if posts.length > 0 %}
+        <!-- Blog Posts -->
+        <div class="space-y-8">
+            {% for post in posts %}
+                <article class="card hover:shadow-md transition-shadow duration-200">
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                        <div class="flex-1">
+                            <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">
+                                <a href="{{ post.url }}" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200">
+                                    {{ post.data.title }}
+                                </a>
+                            </h2>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4 text-lg">
+                                {{ post.data.description or (post.templateContent | striptags | truncate(200)) }}
+                            </p>
+                            <div class="flex flex-wrap items-center gap-4">
+                                <time datetime="{{ post.data.date | date('YYYY-MM-DD') }}" class="text-sm text-gray-500 dark:text-gray-400">
+                                    {{ post.data.date | dateDisplay }}
+                                </time>
+                                {% if post.data.tags %}
+                                    <div class="flex items-center gap-2">
+                                        {% for tag in post.data.tags %}
+                                            {% if tag != "post" %}
+                                                <span class="px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-xs rounded-md">
+                                                    {{ tag }}
+                                                </span>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="lg:flex-shrink-0">
+                            <a href="{{ post.url }}" class="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium transition-colors duration-200">
+                                Read more
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <!-- No Posts Yet -->
+        <div class="text-center py-16">
+            <div class="card max-w-md mx-auto">
+                <div class="text-gray-400 dark:text-gray-600 mb-4 text-6xl">
+                    📝
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                    No Posts Yet
+                </h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                    I'm working on some great content about technology, cybersecurity, emergency management, and ham radio. Check back soon for updates!
+                </p>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Newsletter Signup -->
+    <section class="mt-16 bg-gradient-to-r from-primary-500 to-primary-600 rounded-2xl p-8 text-center text-white">
+        <h3 class="text-2xl font-bold mb-4">
+            Stay Updated
+        </h3>
+        <p class="text-primary-100 mb-6">
+            Get notified when I publish new posts about technology, security, and emergency management.
+        </p>
+        <div class="max-w-md mx-auto">
+            <p class="text-primary-100 text-sm">
+                Coming soon: Email newsletter signup
+            </p>
+        </div>
+    </section>
+</div>
