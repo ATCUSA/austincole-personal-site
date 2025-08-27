@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx tailwindcss -i ./src/assets/css/main.css -o ./_site/assets/css/main.css && eleventy",
+    "build": "eleventy && npx tailwindcss -i ./src/assets/css/main.css -o ./_site/assets/css/main.css",
     "dev": "concurrently \"npx tailwindcss -i ./src/assets/css/main.css -o ./_site/assets/css/main.css --watch\" \"eleventy --serve\"",
     "start": "eleventy --serve"
   },
