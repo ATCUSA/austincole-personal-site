@@ -1,0 +1,12 @@
+name = "austincole-personal-site"
+compatibility_date = "2024-08-27"
+
+[env.production]
+account_id = "5ded550beb08feb732e46a624c8939a4"
+
+# Pages configuration
+pages_build_output_dir = "_site"
+
+# Variables
+[env.production.vars]
+ENVIRONMENT = "production"
