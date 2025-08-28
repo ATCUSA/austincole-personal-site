@@ -277,13 +277,19 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
             
-            const response = await fetch('/api/contact', {
+            // Submit to new TypeScript function
+            const response = await fetch('/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data)
             });
+            
+            if (response.status === 405) {
+                // Functions not deployed yet - show helpful message
+                throw new Error('Contact form backend is still being deployed. Please try again in a few minutes or contact me directly via LinkedIn/GitHub.');
+            }
             
             const result = await response.json();
             
