@@ -12,7 +12,7 @@ const contactFormSchema = z.object({
   message: z.string().min(10, 'Message must be at least 10 characters').max(2000, 'Message must be less than 2000 characters')
 });
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   try {
     // Check if request has JSON content
     const contentType = request.headers.get('content-type');
@@ -49,18 +49,56 @@ export const POST: APIRoute = async ({ request }) => {
 
     const { name, email, subject, message } = result.data;
 
-    // TODO: In production, integrate with email service like:
-    // - Cloudflare Workers Email
-    // - SendGrid
-    // - Resend
-    // - Mailgun
-    // For now, just log and return success
+    // Validate required environment variables
+    const env = locals.runtime?.env;
+    if (!env?.FROM_EMAIL) {
+      throw new Error('FROM_EMAIL environment variable is not configured');
+    }
+    if (!env?.TO_EMAIL) {
+      throw new Error('TO_EMAIL environment variable is not configured');
+    }
+    if (!env?.CONTACT_EMAIL) {
+      throw new Error('CONTACT_EMAIL binding is not configured');
+    }
 
-    console.log('Contact form submission:', {
-      name,
-      email,
+    // Send email using Cloudflare Email Workers
+    const emailMessage = {
+      from: env.FROM_EMAIL,
+      to: env.TO_EMAIL,
+      subject: `Contact Form: ${subject}`,
+      text: `
+Contact Form Submission
+
+From: ${name} (${email})
+Subject: ${subject}
+
+Message:
+${message}
+
+---
+Sent from austincole.us contact form
+Timestamp: ${new Date().toISOString()}
+      `.trim(),
+      html: `
+<h2>Contact Form Submission</h2>
+<p><strong>From:</strong> ${name} (${email})</p>
+<p><strong>Subject:</strong> ${subject}</p>
+
+<h3>Message:</h3>
+<p>${message.replace(/\n/g, '<br>')}</p>
+
+<hr>
+<p><small>Sent from austincole.us contact form<br>
+Timestamp: ${new Date().toISOString()}</small></p>
+      `.trim()
+    };
+
+    await env.CONTACT_EMAIL.send(emailMessage);
+
+    console.log('Contact form email sent successfully:', {
+      from: env.FROM_EMAIL,
+      to: env.TO_EMAIL,
       subject,
-      message,
       timestamp: new Date().toISOString()
     });
 

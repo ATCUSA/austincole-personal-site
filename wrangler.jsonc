@@ -1,0 +1,34 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "austincole-us",
+  "main": "dist/_worker.js/index.js",
+  "compatibility_date": "2024-09-25",
+  "compatibility_flags": ["nodejs_compat"],
+  "build": {
+    "command": "pnpm run build"
+  },
+  "env": {
+    "production": {
+      "name": "austincole-us",
+      "routes": [
+        {
+          "pattern": "austincole.us/*",
+          "zone_name": "austincole.us"
+        }
+      ],
+      "vars": {
+        "FROM_EMAIL": "no-reply@austincole.us",
+        "TO_EMAIL": "mail@acole.us"
+      },
+      "send_email": [
+        {
+          "name": "CONTACT_EMAIL"
+        }
+      ]
+    }
+  },
+  "vars": {
+    "FROM_EMAIL": "no-reply@austincole.us",
+    "TO_EMAIL": "mail@acole.us"
+  }
+}
