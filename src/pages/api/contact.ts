@@ -49,19 +49,40 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
     const { name, email, subject, message } = result.data;
 
+    // Debug: Log available context for troubleshooting
+    console.log('Debug - locals available:', !!locals);
+    console.log('Debug - locals.runtime available:', !!locals?.runtime);
+    console.log('Debug - locals.runtime.env available:', !!locals?.runtime?.env);
+    
+    // Access Cloudflare runtime environment
+    // Based on Astro Cloudflare adapter docs, the runtime should be available via locals.runtime
+    const runtime = locals?.runtime;
+    const env = runtime?.env;
+
+    console.log('Debug - runtime keys:', runtime ? Object.keys(runtime) : 'runtime not available');
+    console.log('Debug - env keys:', env ? Object.keys(env) : 'env not available');
+
+    if (!runtime) {
+      throw new Error('Cloudflare runtime not available - check adapter configuration');
+    }
+
+    if (!env) {
+      throw new Error('Environment variables not available in runtime context');
+    }
+
     // Validate required environment variables
-    const env = locals.runtime?.env;
-    if (!env?.FROM_EMAIL) {
+    if (!env.FROM_EMAIL) {
       throw new Error('FROM_EMAIL environment variable is not configured');
     }
-    if (!env?.TO_EMAIL) {
+    if (!env.TO_EMAIL) {
       throw new Error('TO_EMAIL environment variable is not configured');
     }
-    if (!env?.CONTACT_EMAIL) {
+    if (!env.CONTACT_EMAIL) {
       throw new Error('CONTACT_EMAIL binding is not configured');
     }
 
     // Send email using Cloudflare Email Workers
+    // Based on Email Workers API documentation
     const emailMessage = {
       from: env.FROM_EMAIL,
       to: env.TO_EMAIL,
@@ -93,6 +114,7 @@ Timestamp: ${new Date().toISOString()}</small></p>
       `.trim()
     };
 
+    // Send via Email Workers binding
     await env.CONTACT_EMAIL.send(emailMessage);
 
     console.log('Contact form email sent successfully:', {
