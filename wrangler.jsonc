@@ -1,9 +1,0 @@
-{
-    "$schema": "node_modules/wrangler/config-schema.json",
-    "name": "austincole-personal-site",
-    "compatibility_date": "2025-09-04",
-    "compatibility_flags": ["nodejs_compat"],
-    "assets": {
-        "directory": "./dist"
-    }
-}
