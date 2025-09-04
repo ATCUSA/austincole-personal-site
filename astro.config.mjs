@@ -8,11 +8,8 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://austincole.us',
-  adapter: cloudflare({
-    platformProxy: {
-      enabled: true
-    }
-  }),
+  output: 'server',
+  adapter: cloudflare(),
   integrations: [sitemap()],
 
   vite: {
