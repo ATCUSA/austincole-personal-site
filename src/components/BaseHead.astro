@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 export interface Props {
   title?: string;
   description?: string;
@@ -99,7 +101,6 @@ const socialImage = new URL(image, Astro.site);
 }
 </script>
 
-<link rel="stylesheet" href="/src/styles/global.css">
 <script is:inline>
     // Initialize theme - prevent FOUC (default to dark)
     const theme = (() => {
