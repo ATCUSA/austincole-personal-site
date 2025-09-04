@@ -1,0 +1,137 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { formatDateShort } from '../../utils/date.js';
+
+// Get all blog posts and sort by date (newest first)
+const allBlogPosts = await getCollection('blog');
+const publishedPosts = allBlogPosts
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const featuredPosts = publishedPosts.filter(post => post.data.featured);
+const regularPosts = publishedPosts.filter(post => !post.data.featured);
+---
+
+<Layout title="Blog" description="Thoughts on technology, cybersecurity, emergency management, and ham radio from Austin Cole.">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Page Header -->
+    <div class="text-center mb-12">
+      <h1 class="section-heading">Blog</h1>
+      <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+        Thoughts on technology, cybersecurity, emergency management, and ham radio.
+      </p>
+    </div>
+
+    <!-- Featured Posts -->
+    {featuredPosts.length > 0 && (
+      <section class="mb-16" aria-labelledby="featured-posts-heading">
+        <h2 id="featured-posts-heading" class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-8">Featured Posts</h2>
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {featuredPosts.map((post) => (
+            <article class="card group hover:shadow-lg transition-shadow duration-200" role="article">
+              <div class="p-6">
+                <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    {formatDateShort(post.data.pubDate)}
+                  </time>
+                  <span>•</span>
+                  <span>{post.data.author}</span>
+                </div>
+                
+                <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-3 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
+                  <a href={`/blog/${post.id}/`} class="block" aria-label={`Read article: ${post.data.title}`}>
+                    {post.data.title}
+                  </a>
+                </h3>
+                
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                  {post.data.description}
+                </p>
+                
+                {post.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    {post.data.tags.slice(0, 3).map((tag) => (
+                      <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded text-xs">
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                
+                <a 
+                  href={`/blog/${post.id}/`}
+                  class="inline-flex items-center text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 font-medium"
+                  aria-label={`Read more of ${post.data.title}`}
+                >
+                  Read more →
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- All Posts -->
+    <section aria-labelledby="all-posts-heading">
+      <h2 id="all-posts-heading" class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-8">
+        {featuredPosts.length > 0 ? 'All Posts' : 'Recent Posts'}
+      </h2>
+      
+      {regularPosts.length > 0 ? (
+        <div class="space-y-8">
+          {regularPosts.map((post) => (
+            <article class="card hover:shadow-lg transition-shadow duration-200" role="article">
+              <div class="p-6">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+                  <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                    <time datetime={post.data.pubDate.toISOString()}>
+                      {formatDateShort(post.data.pubDate)}
+                    </time>
+                    <span>•</span>
+                    <span>{post.data.author}</span>
+                  </div>
+                  
+                  {post.data.tags.length > 0 && (
+                    <div class="flex flex-wrap gap-2">
+                      {post.data.tags.slice(0, 4).map((tag) => (
+                        <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded text-xs">
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3 hover:text-brand-600 dark:hover:text-brand-400 transition-colors">
+                  <a href={`/blog/${post.id}/`} aria-label={`Read article: ${post.data.title}`}>
+                    {post.data.title}
+                  </a>
+                </h3>
+                
+                <p class="text-gray-600 dark:text-gray-300 mb-4 text-lg">
+                  {post.data.description}
+                </p>
+                
+                <a 
+                  href={`/blog/${post.id}/`}
+                  class="inline-flex items-center text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 font-medium"
+                  aria-label={`Read full post: ${post.data.title}`}
+                >
+                  Read full post →
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-12">
+          <p class="text-gray-600 dark:text-gray-300 text-lg">
+            No blog posts available yet. Check back soon!
+          </p>
+        </div>
+      )}
+    </section>
+  </div>
+</Layout>

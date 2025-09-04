@@ -1,0 +1,99 @@
+---
+import Layout from './Layout.astro';
+import { formatDate } from '../utils/date.js';
+
+export interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  author: string;
+  tags: string[];
+  image?: {
+    src: string;
+    alt: string;
+  };
+}
+
+const { title, description, pubDate, updatedDate, author, tags, image } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Article Header -->
+    <header class="mb-8">
+      <div class="mb-4">
+        <a href="/blog/" class="text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 font-medium">
+          ← Back to Blog
+        </a>
+      </div>
+      
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+        {title}
+      </h1>
+      
+      <p class="text-xl text-gray-600 dark:text-gray-300 mb-6">
+        {description}
+      </p>
+      
+      <!-- Article Meta -->
+      <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
+        <div class="flex items-center gap-2">
+          <span>By {author}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <time datetime={pubDate.toISOString()}>
+            {formatDate(pubDate)}
+          </time>
+        </div>
+        {updatedDate && (
+          <div class="flex items-center gap-2">
+            <span>Updated {formatDate(updatedDate)}</span>
+          </div>
+        )}
+      </div>
+      
+      <!-- Tags -->
+      {tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mb-8">
+          {tags.map((tag) => (
+            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-sm">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      )}
+      
+      <!-- Featured Image -->
+      {image && (
+        <div class="mb-8">
+          <img 
+            src={image.src} 
+            alt={image.alt}
+            class="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+          />
+        </div>
+      )}
+    </header>
+    
+    <!-- Article Content -->
+    <div class="prose prose-lg dark:prose-invert max-w-none">
+      <slot />
+    </div>
+    
+    <!-- Article Footer -->
+    <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div class="text-sm text-gray-500 dark:text-gray-400">
+          Published on {formatDate(pubDate)}
+          {updatedDate && ` • Updated on ${formatDate(updatedDate)}`}
+        </div>
+        <div class="flex gap-4">
+          <a href="/blog/" class="text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 font-medium">
+            ← Back to Blog
+          </a>
+        </div>
+      </div>
+    </footer>
+  </article>
+</Layout>

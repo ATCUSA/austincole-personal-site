@@ -1,0 +1,421 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import austinImage from "../assets/austin.png";
+import ajImage from "../assets/aj.png";
+import heatherImage from "../assets/heather.png";
+import logoImage from "../assets/logo.png";
+---
+
+<Layout
+    title="About"
+    description="Hi! I'm Austin Cole - Deputy IT Director, CISO, Emergency Management Leader, Ham Radio Operator, and ITDRC volunteer from Genesee, Idaho."
+>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <!-- Profile Picture -->
+            <div class="mb-6">
+                <Image
+                    src={austinImage}
+                    alt="Austin Cole"
+                    class="w-32 h-32 rounded-full mx-auto border-4 border-brand-200 dark:border-brand-700 object-cover"
+                    width={128}
+                    height={128}
+                />
+            </div>
+
+            <h1
+                class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4"
+            >
+                About Me
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300">
+                Deputy IT Director & CISO | Emergency Management Leader | Ham
+                Radio Operator | ITDRC Volunteer
+            </p>
+        </header>
+
+        <!-- Bio Content -->
+        <div class="prose prose-lg dark:prose-invert max-w-none mb-12">
+            <p
+                class="text-xl text-gray-700 dark:text-gray-300 mb-6 leading-relaxed"
+            >
+                Hi! I'm a seasoned IT professional with over 20 years of
+                experience in technology and cybersecurity. I currently serve as
+                Deputy IT Director and Chief Information Security Officer,
+                bringing extensive expertise in both cyber and physical security
+                to my role.
+            </p>
+
+            <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                I'm passionate about building community connections through
+                technology and emergency preparedness. As President and Founder
+                of CommUnity NexUs, Inc. nonprofit and the Do Something Amateur
+                Radio Club (DSARC), I work to strengthen our local community
+                resilience. I also serve as Unit Commander for Latah County
+                Auxiliary Communications, County Emergency Coordinator for ARES,
+                and volunteer with the IT Disaster Resource Center (ITDRC),
+                demonstrating my commitment to public safety and emergency
+                management.
+            </p>
+
+            <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                I balance my professional responsibilities with service as an
+                EMT/Firefighter with Genesee Fire Department. My technical
+                interests span cybersecurity, DIY IoT projects, electronics, and
+                ham radio operations. When I'm not working, I enjoy restoring my
+                1973 Ford Mustang convertible and taking motorcycle rides
+                through the beautiful Idaho countryside.
+            </p>
+
+            <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                Originally from Houston, Texas, I now call the small town of
+                Genesee, Idaho home, where I live with my wife Heather and
+                5-year-old son Austin Junior (AJ). Despite my busy professional
+                life, family remains my greatest passion, and I treasure our
+                Sunday adventures and church time together. Balancing work and
+                family life can be challenging with all my responsibilities, but
+                I try my best to make time for what matters most.
+            </p>
+
+            <p class="italic text-gray-700 dark:text-gray-300 leading-relaxed">
+                I'm a proud Texan at heart with deep roots in technology,
+                emergency management, and community service, always looking to
+                connect with fellow professionals and serve my community.
+            </p>
+        </div>
+
+        <!-- Professional Background -->
+        <section class="mb-12">
+            <h2
+                class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6"
+            >
+                Professional Background
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card">
+                    <h3
+                        class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3"
+                    >
+                        My Current Roles
+                    </h3>
+                    <ul class="space-y-3 text-gray-600 dark:text-gray-300">
+                        <li>• Deputy IT Director & CISO - Latah County</li>
+                        <li>• President & Founder - CommUnity NexUs, Inc.</li>
+                        <li>
+                            • President & Founder - Do Something Amateur Radio
+                            Club
+                        </li>
+                        <li>
+                            • Unit Commander - Latah County Aux Communications
+                        </li>
+                        <li>• County Emergency Coordinator - ARES</li>
+                        <li>
+                            • Volunteer - IT Disaster Resource Center (ITDRC)
+                        </li>
+                        <li>• EMT/Firefighter - Genesee Fire Department</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3
+                        class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3"
+                    >
+                        My Experience
+                    </h3>
+                    <ul class="space-y-3 text-gray-600 dark:text-gray-300">
+                        <li>• 20+ years in Information Technology</li>
+                        <li>• Professional IT work since 2009</li>
+                        <li>• Latah County employee since 2014</li>
+                        <li>• MSP and web development background</li>
+                        <li>
+                            • Specialized in cybersecurity and emergency
+                            management
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interests & Hobbies -->
+        <section class="mb-12">
+            <h2
+                class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6"
+            >
+                My Interests & Hobbies
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div
+                    class="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                >
+                    <div class="text-brand-600 dark:text-brand-400">
+                        <svg
+                            class="w-6 h-6"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                d="M12 2L2 7V10C2 16 6 20.5 12 22C18 20.5 22 16 22 10V7L12 2Z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <span class="text-gray-900 dark:text-gray-100 font-medium"
+                        >Cybersecurity</span
+                    >
+                </div>
+                <div
+                    class="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                >
+                    <div class="text-brand-600 dark:text-brand-400">
+                        <svg
+                            class="w-6 h-6"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <span class="text-gray-900 dark:text-gray-100 font-medium"
+                        >Ham Radio</span
+                    >
+                </div>
+                <div
+                    class="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                >
+                    <div class="text-brand-600 dark:text-brand-400">
+                        <svg
+                            class="w-6 h-6"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V5H19V19Z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <span class="text-gray-900 dark:text-gray-100 font-medium"
+                        >DIY IoT Projects</span
+                    >
+                </div>
+                <div
+                    class="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                >
+                    <div class="text-brand-600 dark:text-brand-400">
+                        <svg
+                            class="w-6 h-6"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <span class="text-gray-900 dark:text-gray-100 font-medium"
+                        >Emergency Management</span
+                    >
+                </div>
+                <div
+                    class="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                >
+                    <div class="text-brand-600 dark:text-brand-400">
+                        <svg
+                            class="w-6 h-6"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                d="M12 12C10.9 12 10 11.1 10 10S10.9 8 12 8 14 8.9 14 10 13.1 12 12 12M21 14H19L18 20H17L16 14H8L7 20H6L5 14H3L4 12H20L21 14Z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <span class="text-gray-900 dark:text-gray-100 font-medium"
+                        >Motorcycle Riding</span
+                    >
+                </div>
+                <div
+                    class="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                >
+                    <div class="text-brand-600 dark:text-brand-400">
+                        <svg
+                            class="w-6 h-6"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M5 17H19V19H5V17M12 5L8.5 11H15.5L12 5Z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <span class="text-gray-900 dark:text-gray-100 font-medium"
+                        >Classic Car Restoration</span
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- Personal Life -->
+        <section class="mb-12">
+            <h2
+                class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6"
+            >
+                My Personal Life
+            </h2>
+            <div class="card">
+                <div class="prose dark:prose-invert max-w-none">
+                    <p>
+                        I live in the small town of Genesee, Idaho with my wife
+                        Heather and 5-year-old son Austin Junior (AJ). Family is
+                        my greatest passion, and despite my busy professional
+                        life, I prioritize spending quality time with them,
+                        especially on Sundays with church and family adventures.
+                        We love going on motorcycle and car rides together,
+                        exploring the beautiful Idaho countryside and making
+                        memories as a family.
+                    </p>
+                    <p>
+                        Originally from Houston, Texas, I appreciate my
+                        small-town Idaho lifestyle but maintain my Texas pride
+                        and fondly remember our family ranch in the hill country
+                        of Bandera, along with the unique food, culture, and
+                        spirit that makes Texas special.
+                    </p>
+                    <p>
+                        In my garage, you'll find my pride and joy - a 1973 Ford
+                        Mustang convertible that I've been restoring. When
+                        weather permits, I enjoy taking my motorcycle out for
+                        solo rides, but even better are the family rides with
+                        Heather and AJ - whether it's cruising in the Mustang or
+                        adventures on the bike. Balancing all my work
+                        commitments with family time isn't always easy, but
+                        these moments together make it all worthwhile.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Family Section -->
+        <section class="mb-12">
+            <h2
+                class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6"
+            >
+                Family
+            </h2>
+            <div class="card">
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                >
+                    <div class="text-center mb-4">
+                        <div class="mb-2">
+                            <Image
+                                src={heatherImage}
+                                alt="Heather Cole"
+                                class="w-24 h-24 rounded-full mx-auto border-2 border-gray-200 dark:border-gray-600 object-cover"
+                                width={96}
+                                height={96}
+                            />
+                        </div>
+                        <h3
+                            class="font-semibold text-gray-900 dark:text-gray-100"
+                        >
+                            Heather
+                        </h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">
+                            Wife
+                        </p>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="mb-2">
+                            <Image
+                                src={ajImage}
+                                alt="Austin Junior (AJ) Cole"
+                                class="w-24 h-24 rounded-full mx-auto border-2 border-gray-200 dark:border-gray-600 object-cover"
+                                width={96}
+                                height={96}
+                            />
+                        </div>
+                        <h3
+                            class="font-semibold text-gray-900 dark:text-gray-100"
+                        >
+                            Austin Junior (AJ)
+                        </h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">
+                            Son
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Family description -->
+                <div class="mt-6 prose dark:prose-invert max-w-none">
+                    <p class="text-center text-gray-600 dark:text-gray-300">
+                        The Cole family enjoys Sunday adventures, church,
+                        motorcycle and car rides, and making memories together
+                        in beautiful Genesee, Idaho.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Connect -->
+        <section
+            class="text-center
+            card
+            bg-gradient-to-r
+            from-brand-50
+            to-brand-100
+            dark:from-brand-900
+            dark:to-brand-800
+            border-brand-200
+            dark:border-brand-700
+            relative
+            overflow-hidden"
+        >
+            <!-- Background Logo -->
+            <div class="absolute inset-0 flex items-center justify-center opacity-5 dark:opacity-10">
+                <Image
+                    src={logoImage}
+                    alt=""
+                    class="w-64 h-64 object-contain"
+                    width={256}
+                    height={256}
+                />
+            </div>
+            
+            <!-- Content -->
+            <div class="relative z-10">
+                <div class="flex items-center justify-center mb-6">
+                    <h2
+                        class="text-2xl font-bold text-gray-900 dark:text-gray-100"
+                    >
+                        Let's Connect
+                    </h2>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 mb-8">
+                    I'm always interested in connecting with fellow technology
+                    professionals, emergency management colleagues, and ham radio
+                    operators.
+                </p>
+                <div class="flex justify-center space-x-6">
+                    <a
+                        href="https://github.com/ATCUSA"
+                        class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 transition-colors duration-200"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        GitHub
+                    </a>
+                    <a
+                        href="https://www.linkedin.com/in/austintcole/"
+                        class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 transition-colors duration-200"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+</Layout>

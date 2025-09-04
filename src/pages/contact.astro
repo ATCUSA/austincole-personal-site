@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <!-- Header -->
+    <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+            Get In Touch
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            I'd love to hear from you. Whether it's a project collaboration, cybersecurity consultation, or just wanting to connect, feel free to reach out.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Contact Info -->
+        <div class="space-y-8">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+                    Let's Connect
+                </h2>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-brand-100 dark:bg-brand-900/30 rounded-lg flex items-center justify-center">
+                            <span class="text-brand-600 dark:text-brand-400 text-xl">📧</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 dark:text-gray-100">Email</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Use the form to send me a message</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-brand-100 dark:bg-brand-900/30 rounded-lg flex items-center justify-center">
+                            <span class="text-brand-600 dark:text-brand-400 text-xl">📍</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 dark:text-gray-100">Location</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Genesee, Idaho</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-brand-100 dark:bg-brand-900/30 rounded-lg flex items-center justify-center">
+                            <span class="text-brand-600 dark:text-brand-400 text-xl">📻</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 dark:text-gray-100">Ham Radio</h3>
+                            <p class="text-gray-600 dark:text-gray-300">KF7SIW</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Links -->
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                    Professional Networks
+                </h3>
+                <div class="flex space-x-4">
+                    <a href="https://github.com/ATCUSA" 
+                       class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors duration-200"
+                       target="_blank" rel="noopener"
+                       aria-label="Visit Austin Cole's GitHub profile (opens in new tab)">
+                        <span class="text-lg">🔗</span>
+                        <span class="text-gray-700 dark:text-gray-300">GitHub</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/austintcole/" 
+                       class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors duration-200"
+                       target="_blank" rel="noopener"
+                       aria-label="Visit Austin Cole's LinkedIn profile (opens in new tab)">
+                        <span class="text-lg">💼</span>
+                        <span class="text-gray-700 dark:text-gray-300">LinkedIn</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="card">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+                Send a Message
+            </h2>
+            
+            <form id="contactForm" class="space-y-6" novalidate role="form" aria-labelledby="contact-form-heading">
+                <h2 id="contact-form-heading" class="sr-only">Contact form</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Name *
+                        </label>
+                        <input type="text" 
+                               id="name" 
+                               name="name" 
+                               required
+                               aria-describedby="name-error"
+                               class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors duration-200"
+                               placeholder="Your full name">
+                        <div id="name-error" class="mt-1 text-sm text-red-600 dark:text-red-400 hidden" data-error="name" role="alert">
+                            Please enter your name
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Email *
+                        </label>
+                        <input type="email" 
+                               id="email" 
+                               name="email" 
+                               required
+                               aria-describedby="email-error"
+                               class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors duration-200"
+                               placeholder="your@email.com">
+                        <div id="email-error" class="mt-1 text-sm text-red-600 dark:text-red-400 hidden" data-error="email" role="alert">
+                            Please enter a valid email address
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Subject *
+                    </label>
+                    <select id="subject" 
+                            name="subject" 
+                            required
+                            aria-describedby="subject-error"
+                            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors duration-200">
+                        <option value="">Select a subject</option>
+                        <option value="cybersecurity">Cybersecurity Consultation</option>
+                        <option value="emergency-mgmt">Emergency Management</option>
+                        <option value="ham-radio">Ham Radio / ARES</option>
+                        <option value="itdrc">ITDRC Volunteer Work</option>
+                        <option value="project">Project Collaboration</option>
+                        <option value="speaking">Speaking Engagement</option>
+                        <option value="general">General Inquiry</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <div id="subject-error" class="mt-1 text-sm text-red-600 dark:text-red-400 hidden" data-error="subject" role="alert">
+                        Please select a subject
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Message *
+                    </label>
+                    <textarea id="message" 
+                              name="message" 
+                              required
+                              rows="6"
+                              aria-describedby="message-error"
+                              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors duration-200"
+                              placeholder="Tell me about your project, question, or how I can help..."></textarea>
+                    <div id="message-error" class="mt-1 text-sm text-red-600 dark:text-red-400 hidden" data-error="message" role="alert">
+                        Please enter your message
+                    </div>
+                </div>
+
+                <!-- Status Messages -->
+                <div id="formStatus" class="hidden" role="status" aria-live="polite">
+                    <div id="infoMessage" class="p-4 bg-blue-100 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg">
+                        <div class="flex items-center">
+                            <span class="text-blue-600 dark:text-blue-400 text-lg mr-2">ℹ️</span>
+                            <span class="text-blue-700 dark:text-blue-300 font-medium">Contact form is display only</span>
+                        </div>
+                        <p class="text-blue-600 dark:text-blue-400 text-sm mt-1">
+                            Please reach out to me directly via GitHub or LinkedIn using the links above.
+                        </p>
+                    </div>
+                </div>
+
+                <button type="submit" 
+                        id="submitBtn"
+                        class="w-full btn btn-primary text-lg py-3">
+                    <span id="submitText">Send Message</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+    const infoMessage = document.getElementById('infoMessage');
+
+    // Form submission - show info message instead of actually submitting
+    form?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Show info message
+        formStatus?.classList.remove('hidden');
+        infoMessage?.classList.remove('hidden');
+        
+        // Scroll to message
+        formStatus?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+});
+</script>
+</Layout>
