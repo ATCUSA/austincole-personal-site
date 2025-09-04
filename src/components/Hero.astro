@@ -1,0 +1,109 @@
+---
+import { Image } from 'astro:assets';
+import Section from './Section.astro';
+
+export interface Props {
+  title: string;
+  subtitle?: string;
+  description?: string;
+  actions?: Array<{
+    label: string;
+    href: string;
+    variant: 'primary' | 'secondary';
+    target?: string;
+  }>;
+  showLogo?: boolean;
+  logoImage?: any;
+  logoAlt?: string;
+  backgroundLogo?: boolean;
+  variant?: 'default' | 'large';
+  className?: string;
+}
+
+const {
+  title,
+  subtitle,
+  description,
+  actions = [],
+  showLogo = false,
+  logoImage,
+  logoAlt = '',
+  backgroundLogo = false,
+  variant = 'default',
+  className = ''
+} = Astro.props;
+
+const titleClasses = {
+  default: 'text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100',
+  large: 'text-4xl md:text-6xl font-bold text-gray-900 dark:text-gray-100'
+};
+
+const padding = variant === 'large' ? 'lg' : 'md';
+---
+
+<Section variant="hero" padding={padding} className={className}>
+  {backgroundLogo && logoImage && (
+    <!-- Background Logo -->
+    <div class="absolute inset-0 flex items-center justify-center opacity-3 dark:opacity-5">
+      <Image
+        src={logoImage}
+        alt=""
+        class="w-96 h-96 object-contain"
+        width={384}
+        height={384}
+      />
+    </div>
+  )}
+  
+  <div class={backgroundLogo ? 'hero-content-with-bg' : 'hero-content'}>
+    {showLogo && logoImage && (
+      <div class="flex items-center justify-center mb-6">
+        <Image
+          src={logoImage}
+          alt={logoAlt}
+          class="w-16 h-16 md:w-20 md:h-20 object-contain mr-4"
+          width={80}
+          height={80}
+        />
+        <h1 class={titleClasses[variant]}>
+          {title}
+        </h1>
+      </div>
+    )}
+    
+    {!showLogo && (
+      <h1 class={`${titleClasses[variant]} mb-6`}>
+        {title}
+      </h1>
+    )}
+    
+    {subtitle && (
+      <p class="text-xl text-gray-600 dark:text-gray-300 mb-6">
+        {subtitle}
+      </p>
+    )}
+    
+    {description && (
+      <p class={variant === 'large' ? 'hero-description-large' : 'hero-description-default'}>
+        {description}
+      </p>
+    )}
+    
+    {actions.length > 0 && (
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        {actions.map((action) => (
+          <a 
+            href={action.href} 
+            class={`btn btn-${action.variant}`}
+            target={action.target}
+          >
+            {action.label}
+          </a>
+        ))}
+      </div>
+    )}
+    
+    {/* Allow for custom content in the hero */}
+    <slot />
+  </div>
+</Section>

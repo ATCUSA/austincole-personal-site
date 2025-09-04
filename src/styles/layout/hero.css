@@ -1,0 +1,19 @@
+@layer utilities {
+  /* Hero Description Variants */
+  .hero-description-large {
+    @apply text-gray-600 dark:text-gray-300 mb-8 text-xl md:text-2xl max-w-3xl mx-auto;
+  }
+
+  .hero-description-default {
+    @apply text-gray-600 dark:text-gray-300 mb-8 text-lg max-w-2xl mx-auto;
+  }
+
+  /* Hero Content Containers */
+  .hero-content-with-bg {
+    @apply text-center relative z-10;
+  }
+
+  .hero-content {
+    @apply text-center;
+  }
+}

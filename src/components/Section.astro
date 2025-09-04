@@ -1,0 +1,43 @@
+---
+export interface Props {
+  variant?: 'default' | 'gray' | 'brand-gradient' | 'hero';
+  className?: string;
+  maxWidth?: '2xl' | '4xl' | '6xl';
+  padding?: 'sm' | 'md' | 'lg' | 'xl';
+  id?: string;
+}
+
+const { 
+  variant = 'default', 
+  className = '', 
+  maxWidth = '6xl', 
+  padding = 'lg',
+  id
+} = Astro.props;
+
+const variants = {
+  default: '',
+  gray: 'bg-gray-50 dark:bg-gray-800',
+  'brand-gradient': 'bg-gradient-to-br from-brand-50 to-brand-100 dark:from-brand-900/20 dark:to-brand-800/20',
+  hero: 'bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden'
+};
+
+const paddingOptions = {
+  sm: 'py-8',
+  md: 'py-12', 
+  lg: 'py-16',
+  xl: 'py-20'
+};
+
+const maxWidthOptions = {
+  '2xl': 'max-w-2xl',
+  '4xl': 'max-w-4xl',
+  '6xl': 'max-w-6xl'
+};
+---
+
+<section class={`${variants[variant]} ${paddingOptions[padding]} ${className}`} {id}>
+  <div class={`${maxWidthOptions[maxWidth]} mx-auto px-4 sm:px-6 lg:px-8`}>
+    <slot />
+  </div>
+</section>

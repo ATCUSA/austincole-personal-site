@@ -1,0 +1,87 @@
+---
+import { formatDateShort } from '../utils/date.ts';
+import { calculateMarkdownReadingTime } from '../utils/reading-time.ts';
+import SkillTag from './SkillTag.astro';
+
+export interface Props {
+  post: {
+    id: string;
+    data: {
+      title: string;
+      description: string;
+      pubDate: Date;
+      author: string;
+      tags?: string[];
+      featured?: boolean;
+    };
+    body: string;
+  };
+  variant?: 'default' | 'featured' | 'compact';
+}
+
+const { post, variant = 'default' } = Astro.props;
+
+// Calculate reading time from the post content
+const readingTime = calculateMarkdownReadingTime(post.body);
+
+const cardClasses = {
+  default: 'card group hover:shadow-lg transition-shadow duration-200',
+  featured: 'card group hover:shadow-lg transition-shadow duration-200 border-l-4 border-brand-600 dark:border-brand-400',
+  compact: 'card group hover:shadow-md transition-shadow duration-200'
+};
+
+const paddingClasses = {
+  default: 'p-6',
+  featured: 'p-6',
+  compact: 'p-4'
+};
+---
+
+<article class={cardClasses[variant]} role="article">
+  <div class={paddingClasses[variant]}>
+    <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-3">
+      <time datetime={post.data.pubDate.toISOString()}>
+        {formatDateShort(post.data.pubDate)}
+      </time>
+      <span>•</span>
+      <span>{post.data.author}</span>
+      <span>•</span>
+      <span title={`${readingTime.words} words`}>{readingTime.text}</span>
+      {post.data.featured && variant !== 'featured' && (
+        <>
+          <span>•</span>
+          <span class="text-brand-600 dark:text-brand-400 font-medium">Featured</span>
+        </>
+      )}
+    </div>
+    
+    <h3 class={variant === 'compact' ? 'blog-card-title-compact' : 'blog-card-title-default'}>
+      <a href={`/blog/${post.id}/`} class="block">
+        {post.data.title}
+      </a>
+    </h3>
+    
+    <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+      {post.data.description}
+    </p>
+    
+    {post.data.tags && post.data.tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-4">
+        {post.data.tags.slice(0, 3).map((tag) => (
+          <SkillTag variant="sm" color="gray">{tag}</SkillTag>
+        ))}
+        {post.data.tags.length > 3 && (
+          <SkillTag variant="sm" color="gray">+{post.data.tags.length - 3} more</SkillTag>
+        )}
+      </div>
+    )}
+    
+    <a href={`/blog/${post.id}/`} 
+       class="inline-flex items-center text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 font-medium text-sm transition-colors">
+      Read more 
+      <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </a>
+  </div>
+</article>

@@ -2,159 +2,20 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
-  /* Custom brand colors */
-  --color-brand-50: #eff6ff;
-  --color-brand-100: #dbeafe;
-  --color-brand-200: #bfdbfe;
-  --color-brand-300: #93c5fd;
-  --color-brand-400: #60a5fa;
-  --color-brand-500: #3b82f6;
-  --color-brand-600: #2563eb;
-  --color-brand-700: #1d4ed8;
-  --color-brand-800: #1e40af;
-  --color-brand-900: #1e3a8a;
-  --color-brand-950: #172554;
-}
+/* Theme */
+@import "./base/theme.css";
 
-@layer components {
-  .nav-link {
-    @apply px-3 py-2 rounded-lg text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200;
-  }
+/* Components */
+@import "./components/buttons.css";
+@import "./components/navigation.css";
+@import "./components/cards.css";
+@import "./components/forms.css";
+@import "./components/tags.css";
 
-  .nav-link.active {
-    @apply bg-brand-100 dark:bg-brand-600/50 text-brand-700 dark:text-brand-200;
-  }
+/* Layout */
+@import "./layout/grid.css";
+@import "./layout/hero.css";
 
-  .btn {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
-  }
-
-  .btn-primary {
-    @apply bg-brand-600 hover:bg-brand-700 text-white focus:ring-brand-500;
-  }
-
-  .btn-secondary {
-    @apply bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100 focus:ring-gray-500;
-  }
-
-  .card {
-    @apply bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700;
-  }
-}
-
-@layer utilities {
-  /* Text utilities */
-  .text-primary {
-    @apply text-gray-900 dark:text-gray-100;
-  }
-  
-  .text-secondary {
-    @apply text-gray-600 dark:text-gray-300;
-  }
-  
-  .text-muted {
-    @apply text-gray-500 dark:text-gray-400;
-  }
-  
-  /* Background utilities */
-  .bg-surface {
-    @apply bg-white dark:bg-gray-800;
-  }
-  
-  .bg-surface-secondary {
-    @apply bg-gray-50 dark:bg-gray-800;
-  }
-  
-  /* Border utilities */
-  .border-primary {
-    @apply border-gray-200 dark:border-gray-700;
-  }
-  
-  /* Brand tag utility */
-  .brand-tag {
-    @apply px-3 py-1 bg-brand-100 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300 rounded-full text-sm;
-  }
-  
-  .brand-tag-lg {
-    @apply px-3 py-2 bg-brand-100 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300 rounded-lg text-sm;
-  }
-  
-  /* Icon container utility */
-  .icon-container {
-    @apply w-12 h-12 bg-brand-100 dark:bg-brand-900/30 rounded-lg flex items-center justify-center;
-  }
-  
-  .icon-container-round {
-    @apply w-12 h-12 bg-brand-100 dark:bg-brand-900/30 rounded-full flex items-center justify-center;
-  }
-  
-  /* Icon text utility */
-  .icon-text {
-    @apply text-brand-600 dark:text-brand-400;
-  }
-  
-  /* Form input utility */
-  .form-input {
-    @apply w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors duration-200;
-  }
-  
-  /* Social link utility */
-  .social-link {
-    @apply text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 transition-colors duration-200;
-  }
-  
-  /* Section heading utility */
-  .section-heading {
-    @apply text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center;
-  }
-  
-  .section-subheading {
-    @apply text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6;
-  }
-
-  /* Prose styling for blog content */
-  .prose {
-    @apply text-gray-700 dark:text-gray-300;
-  }
-  
-  .prose h1 {
-    @apply text-3xl font-bold text-gray-900 dark:text-gray-100 mt-8 mb-4;
-  }
-  
-  .prose h2 {
-    @apply text-2xl font-bold text-gray-900 dark:text-gray-100 mt-6 mb-3;
-  }
-  
-  .prose h3 {
-    @apply text-xl font-bold text-gray-900 dark:text-gray-100 mt-4 mb-2;
-  }
-  
-  .prose p {
-    @apply mb-4 leading-relaxed;
-  }
-  
-  .prose ul, .prose ol {
-    @apply mb-4 pl-6;
-  }
-  
-  .prose li {
-    @apply mb-1;
-  }
-  
-  .prose strong {
-    @apply font-semibold text-gray-900 dark:text-gray-100;
-  }
-  
-  .prose a {
-    @apply text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 underline;
-  }
-  
-  .prose code {
-    @apply bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm font-mono;
-  }
-  
-  .prose blockquote {
-    @apply border-l-4 border-brand-500 pl-4 italic text-gray-600 dark:text-gray-400;
-  }
-}
+/* Utilities */
+@import "./utilities/typography.css";
+@import "./utilities/accessibility.css";

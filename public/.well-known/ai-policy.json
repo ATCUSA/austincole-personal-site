@@ -1,0 +1,31 @@
+{
+  "version": "1.0",
+  "policy": {
+    "ai_training": "disallowed",
+    "data_mining": "disallowed",
+    "content_scraping": "disallowed",
+    "personal_data_usage": "prohibited",
+    "commercial_ai_usage": "prohibited"
+  },
+  "restrictions": {
+    "llm_training": false,
+    "dataset_inclusion": false,
+    "contact_harvesting": false,
+    "email_scraping": false,
+    "phone_scraping": false
+  },
+  "allowed_usage": {
+    "search_indexing": true,
+    "accessibility_tools": true,
+    "legitimate_research": "contact_required"
+  },
+  "contact": {
+    "method": "website_contact_form",
+    "note": "All AI usage requests must be submitted through official channels"
+  },
+  "enforcement": {
+    "legal_action": "reserved",
+    "dmca_takedown": "applicable",
+    "cease_and_desist": "applicable"
+  }
+}

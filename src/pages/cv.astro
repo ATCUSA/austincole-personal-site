@@ -1,0 +1,242 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Section from "../components/Section.astro";
+import Hero from "../components/Hero.astro";
+import SkillTag from "../components/SkillTag.astro";
+import { Image } from "astro:assets";
+import logoImage from "../assets/logo.png";
+import { getCVData } from "../utils/cv";
+import { formatDateRange } from "../types/cv";
+
+const cvData = getCVData();
+const {
+    personalInfo,
+    experience,
+    leadership,
+    certifications,
+    skills,
+    competencies,
+} = cvData;
+---
+
+<Layout
+    title={`CV - ${personalInfo.name}`}
+    description={`Professional CV and resume for ${personalInfo.name} - ${personalInfo.title}`}
+>
+    <!-- Header Section -->
+    <Hero 
+        title={personalInfo.name}
+        subtitle={personalInfo.title}
+        showLogo={true}
+        logoImage={logoImage}
+        logoAlt={`${personalInfo.name} Logo`}
+        actions={[
+            { label: "Print Resume", href: "/cv-print/", variant: "primary", target: "_blank" },
+            { label: "Get In Touch", href: "/contact/", variant: "secondary" }
+        ]}
+    />
+
+    <!-- Professional Summary -->
+    <Section maxWidth="4xl" padding="lg">
+        <h2 class="section-subheading text-center mb-8">
+            Professional Summary
+        </h2>
+        <div class="card">
+            <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                {personalInfo.summary}
+            </p>
+        </div>
+    </Section>
+
+    <!-- Core Competencies -->
+    <Section variant="gray" padding="lg">
+        <h2 class="section-subheading text-center mb-12">Core Competencies</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {
+                competencies.map((competency) => (
+                    <div class="card">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                            {competency.title}
+                        </h3>
+                        <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+                            {competency.items.map((item) => (
+                                <li>• {item}</li>
+                            ))}
+                        </ul>
+                    </div>
+                ))
+            }
+        </div>
+    </Section>
+
+    <!-- Professional Experience -->
+    <Section maxWidth="4xl" padding="lg">
+        <h2 class="section-subheading text-center mb-12">
+            Professional Experience
+        </h2>
+
+        <div class="space-y-12">
+            {
+                experience.map((job) => (
+                    <div class="card">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                                    {job.title}
+                                </h3>
+                                <p class="text-brand-600 dark:text-brand-400 font-medium">
+                                    {job.company}
+                                </p>
+                            </div>
+                            <span class="text-gray-600 dark:text-gray-300 mt-2 md:mt-0">
+                                {formatDateRange(
+                                    job.startDate,
+                                    job.endDate,
+                                    job.current,
+                                )}
+                            </span>
+                        </div>
+                        <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+                            {job.responsibilities.map((responsibility) => (
+                                <li>• {responsibility}</li>
+                            ))}
+                        </ul>
+                    </div>
+                ))
+            }
+        </div>
+    </Section>
+
+    <!-- Leadership & Volunteer Work -->
+    <Section variant="gray" maxWidth="4xl" padding="lg">
+        <h2 class="section-subheading text-center mb-12">
+            Leadership & Volunteer Service
+        </h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {
+                leadership.map((category) => (
+                    <div class="card">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                            {category.category}
+                        </h3>
+                        <div class="space-y-4">
+                            {category.roles.map((role) => (
+                                <div>
+                                    <h4 class="font-medium text-gray-900 dark:text-gray-100">
+                                        {role.title}
+                                    </h4>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        {role.organization}
+                                    </p>
+                                    {role.description && (
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                                            {role.description}
+                                        </p>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </Section>
+
+    <!-- Education & Certifications -->
+    <Section maxWidth="4xl" padding="lg">
+        <h2 class="section-subheading text-center mb-12">
+            Education & Certifications
+        </h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="card">
+                <h3
+                    class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-6"
+                >
+                    Professional Certifications
+                </h3>
+                <div class="space-y-3">
+                    {
+                        certifications.map((cert) => (
+                            <div class="flex items-center">
+                                <span class="w-2 h-2 bg-brand-500 rounded-full mr-3" />
+                                <span class="text-gray-700 dark:text-gray-300">
+                                    {cert}
+                                </span>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <div class="card">
+                <h3
+                    class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-6"
+                >
+                    Technical Skills
+                </h3>
+                <div class="space-y-4">
+                    <div>
+                        <h4
+                            class="font-medium text-gray-900 dark:text-gray-100 mb-2"
+                        >
+                            Systems & Infrastructure
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            {skills.systems.map((skill) => (
+                                <SkillTag variant="default">{skill}</SkillTag>
+                            ))}
+                        </div>
+                    </div>
+                    <div>
+                        <h4
+                            class="font-medium text-gray-900 dark:text-gray-100 mb-2"
+                        >
+                            Security & Compliance
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            {skills.security.map((skill) => (
+                                <SkillTag variant="default">{skill}</SkillTag>
+                            ))}
+                        </div>
+                    </div>
+                    <div>
+                        <h4
+                            class="font-medium text-gray-900 dark:text-gray-100 mb-2"
+                        >
+                            Specializations
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            {skills.specializations.map((skill) => (
+                                <SkillTag variant="default">{skill}</SkillTag>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Section>
+
+    <!-- Call to Action -->
+    <Section
+        variant="brand-gradient"
+        maxWidth="4xl"
+        padding="lg"
+        className="text-center"
+    >
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+            Let's Connect
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300 text-lg mb-8">
+            Interested in discussing cybersecurity, emergency management, or
+            technology leadership opportunities? I'd love to hear from you.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/contact/" class="btn btn-primary"> Get In Touch </a>
+            <a href="/testimonials/" class="btn btn-secondary">
+                View Testimonials
+            </a>
+        </div>
+    </Section>
+</Layout>

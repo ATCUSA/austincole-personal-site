@@ -1,0 +1,52 @@
+@layer components {
+  /* Skill Tag Components */
+  .skill-tag {
+    @apply inline-flex items-center font-medium transition-colors duration-200;
+  }
+
+  .skill-tag-sm {
+    @apply px-2 py-1 text-xs rounded-full;
+  }
+
+  .skill-tag-default {
+    @apply px-3 py-1 text-sm rounded-full;
+  }
+
+  .skill-tag-lg {
+    @apply px-3 py-2 text-sm rounded-lg;
+  }
+
+  /* Color Variants */
+  .skill-tag-brand {
+    @apply bg-brand-100 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300;
+  }
+
+  .skill-tag-gray {
+    @apply bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300;
+  }
+
+  .skill-tag-green {
+    @apply bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300;
+  }
+
+  .skill-tag-blue {
+    @apply bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300;
+  }
+
+  /* Hover States */
+  .skill-tag-brand-hover {
+    @apply hover:bg-brand-200 dark:hover:bg-brand-800/50;
+  }
+
+  .skill-tag-gray-hover {
+    @apply hover:bg-gray-200 dark:hover:bg-gray-600;
+  }
+
+  .skill-tag-green-hover {
+    @apply hover:bg-green-200 dark:hover:bg-green-800/50;
+  }
+
+  .skill-tag-blue-hover {
+    @apply hover:bg-blue-200 dark:hover:bg-blue-800/50;
+  }
+}

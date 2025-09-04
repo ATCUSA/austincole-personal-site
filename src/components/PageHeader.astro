@@ -1,0 +1,36 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  variant?: 'default' | 'large' | 'compact';
+  showDivider?: boolean;
+}
+
+const { title, description, variant = 'default', showDivider = false } = Astro.props;
+
+const headerClasses = {
+  default: 'text-center mb-12',
+  large: 'text-center mb-16',
+  compact: 'text-center mb-8'
+};
+
+const titleClasses = {
+  default: 'section-heading',
+  large: 'text-4xl md:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-6',
+  compact: 'text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4'
+};
+---
+
+<div class={headerClasses[variant]}>
+  <h1 class={titleClasses[variant]}>
+    {title}
+  </h1>
+  {description && (
+    <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+      {description}
+    </p>
+  )}
+  {showDivider && (
+    <div class="w-24 h-1 bg-brand-600 dark:bg-brand-400 mx-auto mt-6"></div>
+  )}
+</div>

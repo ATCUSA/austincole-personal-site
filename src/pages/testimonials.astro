@@ -1,5 +1,36 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ConnectBlock from '../components/ConnectBlock.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import { MessageSquare, Star, Users } from '@lucide/astro';
+import { personalInfo } from '../data/personal-info.ts';
+import { getCollection } from 'astro:content';
+
+// Get all testimonials and organize by category
+const allTestimonials = await getCollection('testimonials');
+const testimonialsByCategory = allTestimonials.reduce((acc, testimonial) => {
+  const category = testimonial.data.category;
+  if (!acc[category]) {
+    acc[category] = [];
+  }
+  acc[category].push({
+    name: testimonial.data.name,
+    title: testimonial.data.title,
+    company: testimonial.data.company,
+    content: testimonial.body || '',
+    initials: testimonial.data.initials
+  });
+  return acc;
+}, {} as Record<string, Array<{name: string, title: string, company: string, content: string, initials?: string}>>);
+
+// Sort by order field
+Object.keys(testimonialsByCategory).forEach(category => {
+  testimonialsByCategory[category].sort((a, b) => {
+    const aTestimonial = allTestimonials.find(t => t.data.name === a.name && t.data.category === category);
+    const bTestimonial = allTestimonials.find(t => t.data.name === b.name && t.data.category === category);
+    return (aTestimonial?.data.order || 0) - (bTestimonial?.data.order || 0);
+  });
+});
 ---
 
 <Layout title="Testimonials" description="What colleagues, friends, and community members say about Austin Cole's work in technology, emergency management, and community service.">
@@ -19,46 +50,12 @@ import Layout from '../layouts/Layout.astro';
         <h2 id="professional-testimonials-heading" class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">
             Professional
         </h2>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- Erin Henrickson, Patriot Rising Technologies -->
-            <div class="card" role="article">
-                <div class="flex items-start gap-4">
-                    <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-brand-100 dark:bg-brand-900/30 rounded-full flex items-center justify-center">
-                            <span class="text-brand-600 dark:text-brand-400 font-semibold text-lg">EH</span>
-                        </div>
-                    </div>
-                    <div class="flex-1">
-                        <blockquote class="text-gray-600 dark:text-gray-300 mb-4 italic">
-                            "I've worked with Austin for years on real, messy infrastructure—joint consulting, server builds, full business re-networks, and even swapping core routers for an ISP. He shows up prepared, documents everything, and executes without drama. When something breaks, he finds root cause instead of band-aids. If I need a steady hand on a high-risk change window, I call Austin first."
-                        </blockquote>
-                        <div class="text-sm">
-                            <div class="font-semibold text-gray-900 dark:text-gray-100">Erin Henrickson</div>
-                            <div class="text-gray-500 dark:text-gray-400">Owner, Patriot Rising Technologies, Inc.</div>
-                        </div>
-                    </div>
+        <div class={(testimonialsByCategory.professional || []).length === 1 ? 'testimonial-grid-centered' : 'testimonial-grid'}>
+            {(testimonialsByCategory.professional || []).map((testimonial) => (
+                <div class={(testimonialsByCategory.professional || []).length === 1 ? 'testimonial-item-centered' : ''}>
+                    <TestimonialCard testimonial={testimonial} variant="professional" />
                 </div>
-            </div>
-
-            <!-- Sample Professional Testimonial 2 -->
-            <div class="card" role="article">
-                <div class="flex items-start gap-4">
-                    <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-brand-100 dark:bg-brand-900/30 rounded-full flex items-center justify-center">
-                            <span class="text-brand-600 dark:text-brand-400 font-semibold text-lg">?</span>
-                        </div>
-                    </div>
-                    <div class="flex-1">
-                        <blockquote class="text-gray-600 dark:text-gray-300 mb-4 italic">
-                            "Add another professional testimonial here focusing on your cybersecurity expertise or emergency management leadership."
-                        </blockquote>
-                        <div class="text-sm">
-                            <div class="font-semibold text-gray-900 dark:text-gray-100">Name</div>
-                            <div class="text-gray-500 dark:text-gray-400">Title, Organization</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            ))}
         </div>
     </section>
 
@@ -67,115 +64,48 @@ import Layout from '../layouts/Layout.astro';
         <h2 id="community-testimonials-heading" class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">
             Community & Volunteer Work
         </h2>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- Erin Henrickson, Volunteer/EM Comms -->
-            <div class="card" role="article">
-                <div class="flex items-start gap-4">
-                    <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
-                            <span class="text-green-600 dark:text-green-400 font-semibold text-lg">EH</span>
-                        </div>
-                    </div>
-                    <div class="flex-1">
-                        <blockquote class="text-gray-600 dark:text-gray-300 mb-4 italic">
-                            "I've served with Austin across AUXCOM and volunteer fire/EM projects. He's reliable in chaos—clear on comms, safety-minded, and willing to do the unglamorous work that keeps operations moving. When the pressure is on, he's the person you want coordinating tech and people."
-                        </blockquote>
-                        <div class="text-sm">
-                            <div class="font-semibold text-gray-900 dark:text-gray-100">Erin Henrickson</div>
-                            <div class="text-gray-500 dark:text-gray-400">Volunteer/EM Comms, Regional VFD Partnerships</div>
-                        </div>
-                    </div>
+        <div class={(testimonialsByCategory.community || []).length === 1 ? 'testimonial-grid-centered' : 'testimonial-grid'}>
+            {(testimonialsByCategory.community || []).map((testimonial) => (
+                <div class={(testimonialsByCategory.community || []).length === 1 ? 'testimonial-item-centered' : ''}>
+                    <TestimonialCard testimonial={testimonial} variant="community" />
                 </div>
-            </div>
-
-            <!-- Sample Community Testimonial 2 -->
-            <div class="card" role="article">
-                <div class="flex items-start gap-4">
-                    <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
-                            <span class="text-green-600 dark:text-green-400 font-semibold text-lg">?</span>
-                        </div>
-                    </div>
-                    <div class="flex-1">
-                        <blockquote class="text-gray-600 dark:text-gray-300 mb-4 italic">
-                            "Add a testimonial from Genesee Fire Department or other volunteer organization about your service and commitment."
-                        </blockquote>
-                        <div class="text-sm">
-                            <div class="font-semibold text-gray-900 dark:text-gray-100">Name</div>
-                            <div class="text-gray-500 dark:text-gray-400">Role, Fire Department/Organization</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            ))}
         </div>
     </section>
 
     <!-- Personal Testimonials -->
-    <section class="mb-16" aria-labelledby="personal-testimonials-heading">
-        <h2 id="personal-testimonials-heading" class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">
-            Personal
-        </h2>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- Sample Personal Testimonial 1 -->
-            <div class="card" role="article">
-                <div class="flex items-start gap-4">
-                    <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
-                            <span class="text-purple-600 dark:text-purple-400 font-semibold text-lg">?</span>
-                        </div>
+    {(testimonialsByCategory.personal && testimonialsByCategory.personal.length > 0) && (
+        <section class="mb-16" aria-labelledby="personal-testimonials-heading">
+            <h2 id="personal-testimonials-heading" class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">
+                Personal
+            </h2>
+            <div class={testimonialsByCategory.personal.length === 1 ? 'testimonial-grid-centered' : 'testimonial-grid'}>
+                {testimonialsByCategory.personal.map((testimonial) => (
+                    <div class={testimonialsByCategory.personal.length === 1 ? 'testimonial-item-centered' : ''}>
+                        <TestimonialCard testimonial={testimonial} variant="personal" />
                     </div>
-                    <div class="flex-1">
-                        <blockquote class="text-gray-600 dark:text-gray-300 mb-4 italic">
-                            "Add a testimonial from a friend or family member about your character, dedication to family, or personal qualities."
-                        </blockquote>
-                        <div class="text-sm">
-                            <div class="font-semibold text-gray-900 dark:text-gray-100">Name</div>
-                            <div class="text-gray-500 dark:text-gray-400">Friend/Family Member</div>
-                        </div>
-                    </div>
-                </div>
+                ))}
             </div>
-
-            <!-- Sample Personal Testimonial 2 -->
-            <div class="card" role="article">
-                <div class="flex items-start gap-4">
-                    <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
-                            <span class="text-purple-600 dark:text-purple-400 font-semibold text-lg">?</span>
-                        </div>
-                    </div>
-                    <div class="flex-1">
-                        <blockquote class="text-gray-600 dark:text-gray-300 mb-4 italic">
-                            "Add another personal testimonial highlighting your values, work-life balance efforts, or community impact."
-                        </blockquote>
-                        <div class="text-sm">
-                            <div class="font-semibold text-gray-900 dark:text-gray-100">Name</div>
-                            <div class="text-gray-500 dark:text-gray-400">Community Member/Friend</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    )}
 
     <!-- Call to Action -->
-    <section class="text-center">
+    <section class="text-center mb-16">
         <div class="card max-w-2xl mx-auto bg-gradient-to-r from-brand-50 to-brand-100 dark:from-brand-900/20 dark:to-brand-800/20 border-brand-200 dark:border-brand-700">
-            <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-                Would You Like to Share a Testimonial?
-            </h3>
+            <div class="flex items-center justify-center gap-3 mb-4">
+                <MessageSquare size={24} class="text-brand-600 dark:text-brand-400" />
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    Would You Like to Share a Testimonial?
+                </h3>
+                <Star size={24} class="text-brand-600 dark:text-brand-400" />
+            </div>
             <p class="text-gray-600 dark:text-gray-300 mb-6">
                 If we've worked together professionally, served in the community together, or you'd like to share your experience, I'd love to hear from you.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="https://www.linkedin.com/in/austintcole/" class="btn btn-primary" target="_blank" rel="noopener" aria-label="Connect with Austin Cole on LinkedIn (opens in new tab)">
-                    Connect on LinkedIn
-                </a>
-                <a href="https://github.com/ATCUSA" class="btn btn-secondary" target="_blank" rel="noopener" aria-label="View Austin Cole's GitHub profile (opens in new tab)">
-                    View My GitHub
-                </a>
-            </div>
         </div>
     </section>
 </div>
+
+<!-- Let's Connect Section -->
+<ConnectBlock personalInfo={personalInfo} variant="full" showTitle={true} />
 </Layout>

@@ -1,4 +1,4 @@
-export function formatDate(date) {
+export function formatDate(date: Date | string): string {
   return new Date(date).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
@@ -6,7 +6,7 @@ export function formatDate(date) {
   });
 }
 
-export function formatDateShort(date) {
+export function formatDateShort(date: Date | string): string {
   return new Date(date).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',

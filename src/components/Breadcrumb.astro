@@ -1,0 +1,117 @@
+---
+import { ChevronRight, Home } from '@lucide/astro';
+import type { BreadcrumbItem } from '../types/index.ts';
+
+export interface Props {
+  items: BreadcrumbItem[];
+  className?: string;
+}
+
+const { items, className = '' } = Astro.props;
+
+// Ensure we have at least a home breadcrumb
+const breadcrumbs: BreadcrumbItem[] = [
+  { label: 'Home', href: '/' },
+  ...items.filter(item => item.label.toLowerCase() !== 'home')
+];
+
+// Mark the last item as current if not already set
+if (breadcrumbs.length > 0 && !breadcrumbs[breadcrumbs.length - 1].current) {
+  breadcrumbs[breadcrumbs.length - 1].current = true;
+}
+---
+
+<nav aria-label="Breadcrumb" class={`breadcrumb ${className}`} role="navigation">
+  <ol class="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-300">
+    {breadcrumbs.map((item, index) => (
+      <li class="flex items-center">
+        {index > 0 && (
+          <ChevronRight 
+            size={14} 
+            class="text-gray-400 dark:text-gray-500 mr-2" 
+            aria-hidden="true" 
+          />
+        )}
+        
+        {item.current ? (
+          <span 
+            class="text-gray-900 dark:text-gray-100 font-medium"
+            aria-current="page"
+          >
+            {index === 0 && (
+              <Home size={14} class="inline mr-1" aria-hidden="true" />
+            )}
+            {item.label}
+          </span>
+        ) : (
+          <a 
+            href={item.href} 
+            class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors duration-200 flex items-center"
+            aria-label={index === 0 ? 'Go to homepage' : `Go to ${item.label}`}
+          >
+            {index === 0 && (
+              <Home size={14} class="inline mr-1" aria-hidden="true" />
+            )}
+            {item.label}
+          </a>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumb {
+    /* Ensure breadcrumbs are above most content but below modals */
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Print styles */
+  @media print {
+    .breadcrumb {
+      display: none;
+    }
+  }
+
+  /* Mobile responsive adjustments */
+  @media (max-width: 640px) {
+    .breadcrumb ol {
+      font-size: 0.75rem; /* text-xs */
+    }
+    
+    /* Hide intermediate breadcrumbs on very small screens, show only first and last */
+    .breadcrumb li:not(:first-child):not(:last-child) {
+      display: none;
+    }
+    
+    /* Add ellipsis when items are hidden */
+    .breadcrumb li:nth-child(2):not(:last-child)::before {
+      content: "...";
+      margin: 0 0.25rem;
+      color: #9ca3af; /* gray-400 */
+    }
+  }
+</style>
+
+<script>
+// Add keyboard navigation for breadcrumbs
+document.addEventListener('DOMContentLoaded', function() {
+  const breadcrumbLinks = document.querySelectorAll('.breadcrumb a');
+  
+  breadcrumbLinks.forEach((link, index) => {
+    link.addEventListener('keydown', function(e) {
+      // Arrow key navigation
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        const nextLink = breadcrumbLinks[index + 1];
+        if (nextLink) nextLink.focus();
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prevLink = breadcrumbLinks[index - 1];
+        if (prevLink) prevLink.focus();
+      }
+    });
+  });
+});
+</script>

@@ -44,15 +44,23 @@ Custom brand colors defined in `@theme` block in `global.css`:
 
 ### Layout Components
 
-#### BaseLayout.astro
-- **Purpose**: Full navigation with mobile menu, hamburger, complete header/footer
-- **Features**: Mobile-responsive navigation, theme toggle, social links
-- **Usage**: Currently unused - designed for complex pages needing full navigation
+#### Layout.astro
+- **Purpose**: Base layout with comprehensive SEO, accessibility, and theme support
+- **Features**: Enhanced BaseHead with Open Graph, Twitter Cards, JSON-LD structured data
+- **Props**: `title`, `description`, `image`, `type`, `publishedTime`, `modifiedTime`, `author`
+- **Usage**: Used by all pages as the primary layout
 
-#### SimpleLayout.astro  
-- **Purpose**: Minimal navigation without mobile menu complexity
-- **Features**: Simple horizontal nav, theme toggle, basic footer
-- **Usage**: Used by ALL current pages (index, about, contact, testimonials, blog)
+#### Section.astro
+- **Purpose**: Standardized section wrapper with consistent styling and spacing
+- **Features**: Multiple variants, responsive padding, semantic HTML
+- **Props**: `variant` (default/gray/brand-gradient/hero), `className`, `maxWidth`, `padding`, `id`
+- **Usage**: Wraps all major page sections to reduce code duplication
+
+#### Hero.astro
+- **Purpose**: Flexible hero section component with logo and action button support
+- **Features**: Logo integration, background logos, action buttons, multiple variants
+- **Props**: `title`, `subtitle`, `description`, `actions[]`, `showLogo`, `logoImage`, `backgroundLogo`, `variant`
+- **Usage**: Homepage and CV page hero sections
 
 ### UI Components
 
@@ -73,14 +81,41 @@ Custom brand colors defined in `@theme` block in `global.css`:
 </div>
 ```
 
-#### Brand Tags
+#### SkillTag.astro
 ```astro
-<!-- Small rounded tags -->
-<span class="brand-tag">Cybersecurity</span>
+<!-- Small skill tag -->
+<SkillTag size="sm" color="brand">React</SkillTag>
 
-<!-- Large rectangular tags -->
-<span class="brand-tag-lg">Emergency Management</span>
+<!-- Default skill tag -->
+<SkillTag color="blue">TypeScript</SkillTag>
+
+<!-- Large skill tag with link -->
+<SkillTag size="lg" color="green" href="/projects">Node.js</SkillTag>
 ```
+
+**Props:**
+- `size`: "sm" | "default" | "lg"
+- `color`: "brand" | "gray" | "green" | "blue"
+- `href`: Optional URL for links
+
+#### TestimonialCard.astro
+```astro
+<TestimonialCard testimonial={testimonialData} variant="professional" />
+```
+
+**Props:**
+- `testimonial`: Object with name, title, company, content, initials
+- `variant`: "professional" | "community" | "personal"
+
+#### ConnectBlock.astro
+```astro
+<ConnectBlock personalInfo={personalInfo} variant="full" showTitle={true} />
+```
+
+**Props:**
+- `personalInfo`: Contact and social media data
+- `variant`: "compact" | "full"
+- `showTitle`: Boolean for section title display
 
 #### Icon Containers
 ```astro
@@ -117,21 +152,31 @@ Custom brand colors defined in `@theme` block in `global.css`:
 
 ### Page Structure
 ```astro
-<SimpleLayout title="Page Title" description="Page description">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<Layout title="Page Title" description="Page description">
+  <SkipLinks links={skipLinksData} />
+  <div id="main-content">
     <!-- Page content -->
   </div>
-</SimpleLayout>
+</Layout>
 ```
 
 ### Section Structure
 ```astro
-<section class="py-16">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="section-heading">Section Title</h2>
-    <!-- Section content -->
-  </div>
-</section>
+<Section variant="default" maxWidth="6xl" padding="lg">
+  <PageHeader title="Section Title" subtitle="Optional subtitle" />
+  <!-- Section content -->
+</Section>
+```
+
+### Hero Section Structure
+```astro
+<Hero 
+  title="Page Title"
+  subtitle="Subtitle"
+  description="Description text"
+  actions={[{ text: "Get Started", href: "/contact", primary: true }]}
+  showLogo={true}
+/>
 ```
 
 ### Grid Layouts
@@ -200,35 +245,100 @@ Custom brand colors defined in `@theme` block in `global.css`:
 <h1 class="text-2xl sm:text-3xl lg:text-4xl">
 ```
 
+## CSS Architecture
+
+### Modular Structure
+The CSS is organized into logical modules imported through `global.css`:
+
+```
+src/styles/
+├── global.css              # Main entry point with @import statements
+├── base/
+│   └── theme.css          # Brand colors and theme definitions
+├── components/
+│   ├── buttons.css        # Button variants and social buttons
+│   ├── navigation.css     # Navigation link styles
+│   ├── cards.css          # Card components and variants
+│   ├── forms.css          # Form input utilities
+│   └── tags.css           # Skill tag components
+├── layout/
+│   ├── grid.css           # Grid layouts and patterns
+│   └── hero.css           # Hero section variants
+└── utilities/
+    ├── typography.css     # Text utilities and prose styles
+    └── accessibility.css  # Skip links and semantic utilities
+```
+
+### Import Order
+1. **Tailwind CSS**: Core framework import
+2. **Theme**: Color definitions and design tokens
+3. **Components**: Reusable component patterns
+4. **Layout**: Grid systems and layout patterns
+5. **Utilities**: Typography and accessibility utilities
+
 ## File Organization
 
 ### Layouts
-- `BaseLayout.astro` - Full navigation (unused currently)
-- `SimpleLayout.astro` - Minimal navigation (used by all pages)
+- `Layout.astro` - Base layout with enhanced SEO and accessibility
+- `BlogPost.astro` - Blog post layout with structured data
+
+### Components
+- `Section.astro` - Standardized section wrapper
+- `Hero.astro` - Flexible hero component
+- `SkillTag.astro` - Skill/technology tags
+- `TestimonialCard.astro` - Testimonial display component
+- `ConnectBlock.astro` - Social links and contact CTA
+- `PageHeader.astro` - Page title headers
+- `SkipLinks.astro` - Accessibility navigation
+- `SocialButtons.astro` - Social media link buttons
+- `BlogCard.astro` - Blog post preview cards
 
 ### Pages
-- `index.astro` - Homepage
+- `index.astro` - Homepage with hero and sections
 - `about.astro` - About page
-- `contact.astro` - Contact form (layout only, no backend)
-- `testimonials.astro` - Testimonials and recommendations
-- `blog.astro` - Blog placeholder
+- `contact.astro` - Contact form with API integration
+- `testimonials.astro` - Testimonials using content collections
+- `cv.astro` - Resume/CV page
+- `cv-print.astro` - Print-optimized CV
+- `blog/` - Blog pages and routing
+
+### API Endpoints
+- `api/contact.ts` - Contact form submission with validation
+- `api/cv-pdf.ts` - CV data for PDF generation
+
+### Content Collections
+- `content/testimonials/` - Testimonial markdown files
+- `content.config.ts` - Content collection schemas
 
 ### Styles
-- `global.css` - Tailwind imports, theme colors, custom components and utilities
+- `global.css` - Main entry point with imports following v4 best practices
+- `base/` - Theme definitions and foundational styles
+- `components/` - Component-specific styles (buttons, forms, cards, etc.)
+- `layout/` - Layout utilities and patterns (grid, hero)
+- `utilities/` - Typography and accessibility utilities
 
 ## Best Practices
 
 ### CSS Classes
-1. Use semantic utility classes (`.text-primary`) over specific ones
-2. Group related utilities with custom component classes
-3. Prefer `@layer components` for reusable components
-4. Use `@layer utilities` for single-purpose utilities
+1. Use CSS-first approach with modular organization following Tailwind v4 best practices
+2. Use semantic utility classes (`.skill-tag`, `.btn-primary`) over inline repetitive classes
+3. Prefer `@theme` definitions in `base/theme.css` for color systems
+4. Group related utilities into appropriate module files for maintainability
+5. Use `@layer components` for reusable component patterns
+6. Use `@layer utilities` for single-purpose utility classes
+
+### Component Architecture
+1. Use `Section.astro` wrapper for all major page sections
+2. Leverage `Hero.astro` for consistent hero sections
+3. Use `SkillTag.astro` for all skill/technology displays
+4. Implement `TestimonialCard.astro` for consistent testimonial formatting
+5. Standard component props with TypeScript interfaces
 
 ### Layout Consistency
-1. All pages use `SimpleLayout` for consistency
-2. Standard container and padding patterns
-3. Consistent section spacing with `py-16`
-4. Responsive grid patterns
+1. All pages use `Layout.astro` for consistent SEO and accessibility
+2. Use `Section` component for standardized container and padding patterns
+3. Implement `SkipLinks` for accessibility compliance
+4. Consistent responsive grid patterns with dynamic layouts
 
 ### Dark Mode
 1. Always provide dark mode variants for custom colors
@@ -241,20 +351,62 @@ Custom brand colors defined in `@theme` block in `global.css`:
 3. Sufficient color contrast
 4. Semantic HTML structure
 
+## API Integration
+
+### Contact Form API
+- **Endpoint**: `/api/contact` (POST)
+- **Validation**: Zod schema with comprehensive field validation
+- **Features**: CORS support, detailed error messages, server-side rendering
+- **Security**: Input sanitization, content-type validation, rate limiting ready
+
+### Content Collections
+- **Testimonials**: Type-safe testimonial management with categories and ordering
+- **Blog**: Ready for blog content with frontmatter validation
+- **Schema**: Zod validation for consistent data structure
+
+## Accessibility Features
+
+### WCAG Compliance
+- Skip links with `SkipLinks.astro` component
+- Semantic HTML structure with proper heading hierarchy
+- ARIA labels and descriptions for form fields
+- Keyboard navigation support
+- Focus management and visible focus indicators
+
+### Implementation
+- `role` attributes for complex UI components
+- `aria-live` regions for dynamic content updates
+- `aria-describedby` for form validation messages
+- Screen reader friendly error messaging
+
+## Performance Optimization
+
+### Bundle Size
+- CSS-first utility classes reduce repeated Tailwind classes
+- Component-based architecture for code reuse
+- Minimal client-side JavaScript (vanilla JS for forms)
+- Astro's zero-JS by default approach
+
+### Loading Performance
+- Optimized images and assets
+- Critical CSS inlined
+- Proper resource hints and preloading
+- Core Web Vitals optimization
+
 ## Future Considerations
 
-### Layout Consolidation
-- `BaseLayout` is currently unused - consider removing or finding specific use case
-- Significant duplication between layouts could be extracted to shared components
-- Mobile menu functionality in `BaseLayout` might be useful for complex pages
+### Enhanced Features
+- Consider adding search functionality for blog content
+- Implement tag-based filtering for testimonials
+- Add RSS feed generation for blog posts
+- Consider PWA features for offline functionality
 
-### Component Extraction
-- Consider extracting repeated patterns into Astro components
-- Navigation could be a separate component
-- Footer could be a separate component
-- Theme toggle could be a separate component
+### Content Management
+- Explore CMS integration for non-technical content updates
+- Consider automated testimonial collection workflows
+- Implement content versioning and scheduling
 
-### Performance
-- Custom utility classes reduce bundle size vs. repeated Tailwind classes
-- Consider component-level CSS for complex interactions
-- Optimize for Core Web Vitals
+### Analytics Integration
+- Implement privacy-focused analytics
+- Add performance monitoring
+- Track form conversion rates and user engagement

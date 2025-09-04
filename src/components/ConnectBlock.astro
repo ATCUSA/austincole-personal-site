@@ -1,0 +1,75 @@
+---
+import { Mail, Phone, MapPin, Radio } from '@lucide/astro';
+import SocialButtons from './SocialButtons.astro';
+import { personalInfo as defaultPersonalInfo } from '../data/personal-info.ts';
+import { Image } from 'astro:assets';
+import logoImage from '../assets/logo.png';
+
+export interface Props {
+  personalInfo?: {
+    location: string;
+    linkedin: string;
+    github: string;
+    hamRadio?: string;
+  };
+  variant?: 'full' | 'compact' | 'minimal';
+  showTitle?: boolean;
+}
+
+const { personalInfo = defaultPersonalInfo, variant = 'full', showTitle = true } = Astro.props;
+
+const sectionClasses = {
+  minimal: 'py-8',
+  compact: 'py-12', 
+  full: 'py-16'
+};
+
+const containerClasses = {
+  minimal: 'max-w-2xl mx-auto px-4 sm:px-6 lg:px-8',
+  compact: 'max-w-4xl mx-auto px-4 sm:px-6 lg:px-8',
+  full: 'max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'
+};
+---
+
+<section class={`connect-block relative bg-gray-50 dark:bg-gray-800 ${sectionClasses[variant]} overflow-hidden`}>
+  <!-- Background Logo -->
+  <div class="absolute inset-0 flex items-center justify-center opacity-5 dark:opacity-10">
+    <Image
+      src={logoImage}
+      alt=""
+      class="w-64 h-64 object-contain"
+      width={256}
+      height={256}
+    />
+  </div>
+  
+  <div class={`${containerClasses[variant]} relative z-10`}>
+    {showTitle && (
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">Let's Connect</h2>
+        <p class="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
+          Always interested in connecting with fellow technology professionals, emergency management colleagues, and ham radio operators.
+        </p>
+      </div>
+    )}
+    
+    <div class="flex flex-col items-center text-center space-y-8">
+      <div class="social-links">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-6">Connect with Me</h3>
+        <SocialButtons 
+          linkedinUrl={personalInfo.linkedin} 
+          githubUrl={personalInfo.github}
+          variant="default"
+          size="lg"
+        />
+      </div>
+      
+      <div class="contact-form-link">
+        <a href="/contact/" class="btn btn-primary">
+          Send Me a Message
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+

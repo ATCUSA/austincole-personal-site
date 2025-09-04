@@ -1,0 +1,41 @@
+@layer components {
+  /* Skip Links for Accessibility */
+  .skip-link {
+    @apply absolute left-0 top-0 z-50 px-4 py-2 bg-brand-600 text-white font-medium rounded-br-lg transform -translate-y-full focus:translate-y-0 transition-transform duration-200;
+  }
+
+  /* Focus management for main content */
+  #main-content:focus {
+    outline: none;
+  }
+}
+
+@layer utilities {
+  /* Background utilities */
+  .bg-surface {
+    @apply bg-white dark:bg-gray-800;
+  }
+  
+  .bg-surface-secondary {
+    @apply bg-gray-50 dark:bg-gray-800;
+  }
+  
+  /* Border utilities */
+  .border-primary {
+    @apply border-gray-200 dark:border-gray-700;
+  }
+  
+  /* Icon container utility */
+  .icon-container {
+    @apply w-12 h-12 bg-brand-100 dark:bg-brand-900/30 rounded-lg flex items-center justify-center;
+  }
+  
+  .icon-container-round {
+    @apply w-12 h-12 bg-brand-100 dark:bg-brand-900/30 rounded-full flex items-center justify-center;
+  }
+  
+  /* Icon text utility */
+  .icon-text {
+    @apply text-brand-600 dark:text-brand-400;
+  }
+}

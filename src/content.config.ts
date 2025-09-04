@@ -19,4 +19,17 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const testimonials = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/testimonials" }),
+  schema: z.object({
+    name: z.string(),
+    title: z.string(),
+    company: z.string(),
+    category: z.enum(['professional', 'community', 'personal']),
+    initials: z.string().optional(),
+    featured: z.boolean().default(false),
+    order: z.number().default(0),
+  }),
+});
+
+export const collections = { blog, testimonials };

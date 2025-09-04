@@ -1,0 +1,68 @@
+@layer utilities {
+  /* Text utilities */
+  .text-primary {
+    @apply text-gray-900 dark:text-gray-100;
+  }
+  
+  .text-secondary {
+    @apply text-gray-600 dark:text-gray-300;
+  }
+  
+  .text-muted {
+    @apply text-gray-500 dark:text-gray-400;
+  }
+  
+  /* Section heading utility */
+  .section-heading {
+    @apply text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center;
+  }
+  
+  .section-subheading {
+    @apply text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6;
+  }
+
+  /* Prose styling for blog content */
+  .prose {
+    @apply text-gray-700 dark:text-gray-300;
+  }
+  
+  .prose h1 {
+    @apply text-3xl font-bold text-gray-900 dark:text-gray-100 mt-8 mb-4;
+  }
+  
+  .prose h2 {
+    @apply text-2xl font-bold text-gray-900 dark:text-gray-100 mt-6 mb-3;
+  }
+  
+  .prose h3 {
+    @apply text-xl font-bold text-gray-900 dark:text-gray-100 mt-4 mb-2;
+  }
+  
+  .prose p {
+    @apply mb-4 leading-relaxed;
+  }
+  
+  .prose ul, .prose ol {
+    @apply mb-4 pl-6;
+  }
+  
+  .prose li {
+    @apply mb-1;
+  }
+  
+  .prose strong {
+    @apply font-semibold text-gray-900 dark:text-gray-100;
+  }
+  
+  .prose a {
+    @apply text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 underline;
+  }
+  
+  .prose code {
+    @apply bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm font-mono;
+  }
+  
+  .prose blockquote {
+    @apply border-l-4 border-brand-500 pl-4 italic text-gray-600 dark:text-gray-400;
+  }
+}

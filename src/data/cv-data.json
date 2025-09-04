@@ -1,0 +1,208 @@
+{
+  "personalInfo": {
+    "name": "Austin Cole",
+    "title": "Deputy Director / Chief Information Security Officer",
+    "location": "Genesee, Idaho",
+    "linkedin": "https://www.linkedin.com/in/austintcole/",
+    "github": "https://github.com/ATCUSA",
+    "hamRadio": "KF7SIW",
+    "summary": "Experienced IT leader with over 20 years of experience in cybersecurity, infrastructure management, and emergency preparedness. Currently serving as Deputy IT Director and Chief Information Security Officer for Latah County, Idaho. Passionate about leveraging technology to strengthen communities and enhance emergency response capabilities. Active in amateur radio, emergency management, and nonprofit leadership."
+  },
+  "experience": [
+    {
+      "id": "deputy-director-ciso",
+      "title": "Deputy Director / Chief Information Security Officer (CISO)",
+      "company": "Latah County, Idaho",
+      "startDate": "2024-10",
+      "endDate": null,
+      "current": true,
+      "type": "full-time",
+      "responsibilities": [
+        "Lead cybersecurity initiatives and information security program for county government",
+        "Oversee IT infrastructure, systems administration, and technology strategic planning",
+        "Provide critical on-call support for life safety operations including Sheriff's Office and 911 dispatch",
+        "Manage and support radio systems and CAD (Computer Aided Dispatch) systems for public safety",
+        "Coordinate emergency communications and disaster recovery planning",
+        "Supervise IT staff and provide technical leadership across departments",
+        "Manage IT budget, vendor relationships, and compliance requirements"
+      ]
+    },
+    {
+      "id": "sr-system-admin",
+      "title": "Sr. System Administrator",
+      "company": "Latah County, Idaho",
+      "startDate": "2022-06",
+      "endDate": "2024-09",
+      "current": false,
+      "type": "full-time",
+      "responsibilities": [
+        "Managed mixed Linux/Windows server environments with emphasis on high availability and security",
+        "Implemented firewalls, VPNs, and network troubleshooting for critical infrastructure and public safety systems",
+        "Provided 24/7 on-call support for critical life safety operations including Sheriff's Office and 911 dispatch",
+        "Supported radio systems and CAD systems essential for emergency response operations",
+        "Oversaw system backups, disaster recovery operations, and data integrity for county services",
+        "Collaborated with county departments to align IT solutions with operational needs"
+      ]
+    },
+    {
+      "id": "it-systems-admin",
+      "title": "IT Systems Administrator",
+      "company": "Latah County, Idaho",
+      "startDate": "2016-10",
+      "endDate": "2022-10",
+      "current": false,
+      "type": "full-time",
+      "responsibilities": [
+        "Configured and maintained servers, ensuring network stability and operational efficiency",
+        "Provided on-call IT support for critical public safety systems and emergency services",
+        "Administered key services including web, SFTP, DNS, and VPN servers",
+        "Supported radio communications and CAD systems for law enforcement and emergency dispatch",
+        "Managed phone systems, streamlining communication across county departments"
+      ]
+    },
+    {
+      "id": "system-technician",
+      "title": "System Technician",
+      "company": "Latah County, Idaho",
+      "startDate": "2014-10",
+      "endDate": "2016-09",
+      "current": false,
+      "type": "full-time",
+      "responsibilities": [
+        "Provided technical support and troubleshooting for county systems",
+        "Assisted with network administration and maintenance",
+        "Supported hardware and software installations",
+        "Maintained IT documentation and inventory"
+      ]
+    },
+    {
+      "id": "msp-consulting",
+      "title": "MSP Owner / Web Developer / Cybersecurity Specialist",
+      "company": "Independent Consulting",
+      "startDate": "2012-01",
+      "endDate": null,
+      "current": true,
+      "type": "consulting",
+      "responsibilities": [
+        "Operate managed service provider business serving small to medium businesses",
+        "Manage Windows and Linux enterprise environments with specialized expertise in Linux systems",
+        "Provide device troubleshooting, hardware repairs, and system upgrades",
+        "Design and implement network infrastructure, consulting on optimal solutions",
+        "Administer servers, domains, and hosting services for client environments",
+        "Develop custom web applications and provide cybersecurity consulting services",
+        "Implement security assessments, vulnerability testing, and compliance solutions",
+        "Deliver comprehensive IT services including 24/7 support and managed infrastructure"
+      ]
+    },
+    {
+      "id": "it-specialist",
+      "title": "IT Specialist",
+      "company": "Various Organizations",
+      "startDate": "2004-01",
+      "endDate": "2012-12",
+      "current": false,
+      "type": "full-time",
+      "responsibilities": [
+        "Network administration and technical support roles",
+        "Hardware and software troubleshooting",
+        "Database management and reporting",
+        "Customer service and user training"
+      ]
+    }
+  ],
+  "leadership": [
+    {
+      "category": "Emergency Management Leadership",
+      "roles": [
+        {
+          "title": "Unit Commander & County Emergency Coordinator",
+          "organization": "Latah County Auxiliary Communications & ARES"
+        },
+        {
+          "title": "EMT/Firefighter",
+          "organization": "Genesee Fire Department"
+        },
+        {
+          "title": "Volunteer",
+          "organization": "IT Disaster Resource Center (ITDRC)"
+        }
+      ]
+    },
+    {
+      "category": "Nonprofit Leadership",
+      "roles": [
+        {
+          "title": "President & Founder",
+          "organization": "CommUnity NexUs, Inc.",
+          "description": "Community technology and emergency preparedness nonprofit"
+        },
+        {
+          "title": "President & Founder",
+          "organization": "DSARC (Digital Systems Amateur Radio Club)",
+          "description": "Amateur radio club focused on digital communications"
+        }
+      ]
+    }
+  ],
+  "certifications": [
+    "NREMT, Idaho & Montana EMT Licenses",
+    "AHA Faculty Trainer (BLS & Heartsaver)",
+    "Red Cross CPR/First Aid/AED, Trauma & EMR Instructor",
+    "CompTIA Security+",
+    "FEMA Emergency Management Certifications",
+    "Amateur Radio Extra Class License (KF7SIW)"
+  ],
+  "skills": {
+    "systems": [
+      "Windows Server",
+      "VMware",
+      "Active Directory",
+      "PowerShell",
+      "Linux Administration",
+      "Network Management"
+    ],
+    "security": [
+      "Risk Assessment",
+      "NIST Framework",
+      "Incident Response",
+      "Vulnerability Testing",
+      "Compliance Solutions"
+    ],
+    "specializations": [
+      "Public Safety Systems",
+      "Emergency Communications",
+      "Radio Systems",
+      "CAD Systems",
+      "911 Infrastructure"
+    ]
+  },
+  "competencies": [
+    {
+      "title": "Cybersecurity & Risk Management",
+      "items": [
+        "Information Security Program Development",
+        "Risk Assessment & Mitigation",
+        "Compliance & Governance",
+        "Incident Response Planning"
+      ]
+    },
+    {
+      "title": "IT Leadership & Strategy",
+      "items": [
+        "Strategic Technology Planning",
+        "Team Leadership & Development",
+        "Budget Management",
+        "Vendor Relations"
+      ]
+    },
+    {
+      "title": "Emergency Management",
+      "items": [
+        "Emergency Communications",
+        "Disaster Response Coordination",
+        "Community Preparedness",
+        "Amateur Radio Operations"
+      ]
+    }
+  ]
+}

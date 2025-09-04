@@ -1,0 +1,27 @@
+---
+export interface Props {
+  variant?: 'sm' | 'default' | 'lg';
+  color?: 'brand' | 'gray' | 'green' | 'blue';
+  href?: string;
+  className?: string;
+}
+
+const { 
+  variant = 'default', 
+  color = 'brand',
+  href,
+  className = '' 
+} = Astro.props;
+
+const classes = `skill-tag skill-tag-${variant} skill-tag-${color} ${href ? `skill-tag-${color}-hover` : ''} ${className}`;
+---
+
+{href ? (
+  <a href={href} class={classes}>
+    <slot />
+  </a>
+) : (
+  <span class={classes}>
+    <slot />
+  </span>
+)}

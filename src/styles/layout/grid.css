@@ -1,0 +1,23 @@
+@layer utilities {
+  /* Grid Layout Utilities */
+  .testimonial-grid {
+    @apply grid gap-8 grid-cols-1 lg:grid-cols-2;
+  }
+
+  .testimonial-grid-centered {
+    @apply grid gap-8 grid-cols-1 place-items-center;
+  }
+
+  .testimonial-item-centered {
+    @apply max-w-2xl;
+  }
+
+  /* Social Buttons Layout */
+  .social-buttons-compact {
+    @apply flex gap-3 flex-row;
+  }
+
+  .social-buttons-default {
+    @apply flex gap-3 flex-col sm:flex-row;
+  }
+}

@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import SkipLinks from '../components/SkipLinks.astro';
 import ThemeScript from '../components/ThemeScript.astro';
 
 export interface Props {
@@ -18,13 +19,43 @@ const { title, description } = Astro.props;
     <BaseHead title={title} description={description} />
 </head>
 <body class="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <SkipLinks />
     <Header />
 
-    <main class="flex-1">
+    <main id="main-content" class="flex-1" tabindex="-1">
         <slot />
     </main>
 
     <Footer />
     <ThemeScript />
+    
+    <script>
+      // Enhanced skip link functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const skipLinks = document.querySelectorAll('.skip-link');
+        
+        skipLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+              // Focus the target element
+              targetElement.focus();
+              
+              // If it's the main content, add a visual focus indicator briefly
+              if (targetId === '#main-content') {
+                targetElement.style.outline = '2px solid #2563eb';
+                targetElement.style.outlineOffset = '2px';
+                setTimeout(() => {
+                  targetElement.style.outline = '';
+                  targetElement.style.outlineOffset = '';
+                }, 2000);
+              }
+            }
+          });
+        });
+      });
+    </script>
 </body>
 </html>

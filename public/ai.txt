@@ -1,0 +1,38 @@
+# AI.txt - AI Bot Instructions
+# This file provides instructions for AI crawlers and training bots
+
+# General Policy
+ai-usage-restriction: true
+ai-training: disallowed
+data-mining: disallowed
+
+# Specific Bot Instructions
+User-agent: *
+Disallow: /api/
+Disallow: /resumes/
+Disallow: /*.pdf$
+Disallow: /contact/
+
+# Contact Information Protection
+personal-data-usage: prohibited
+contact-scraping: disallowed
+email-harvesting: prohibited
+phone-scraping: prohibited
+
+# Content Usage
+content-training: opt-out
+llm-training: disallowed
+ai-dataset-inclusion: prohibited
+
+# Allowed Usage
+public-pages: /about/, /cv/, /testimonials/, /blog/
+indexing-allowed: search-engines-only
+commercial-usage: prohibited
+
+# Rights Reserved
+copyright: all-rights-reserved
+reproduction: permission-required
+commercial-use: prohibited
+
+# Contact for AI Usage Requests
+# Please contact through the website contact form for any AI usage requests

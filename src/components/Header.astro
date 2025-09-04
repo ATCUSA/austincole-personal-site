@@ -1,9 +1,11 @@
 ---
+import { Sun, Moon, Menu, Home, User, FileText, MessageSquare, BookOpen, Mail } from '@lucide/astro';
+
 const currentPath = Astro.url.pathname;
 ---
 
 <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
-    <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav id="navigation" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
             <div class="flex items-center">
                 <a href="/" class="text-xl font-bold text-gray-900 dark:text-gray-100">
@@ -13,18 +15,37 @@ const currentPath = Astro.url.pathname;
             
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex items-center space-x-4" role="navigation" aria-label="Main navigation">
-                <a href="/" class={`nav-link ${currentPath === '/' ? 'active' : ''}`}>Home</a>
-                <a href="/about/" class={`nav-link ${currentPath.includes('/about/') ? 'active' : ''}`}>About</a>
-                <a href="/testimonials/" class={`nav-link ${currentPath.includes('/testimonials/') ? 'active' : ''}`}>Testimonials</a>
-                <a href="/blog/" class={`nav-link ${currentPath.includes('/blog/') ? 'active' : ''}`}>Blog</a>
-                <a href="/contact/" class={`nav-link ${currentPath.includes('/contact/') ? 'active' : ''}`}>Contact</a>
+                <a href="/" class={`nav-link-base ${currentPath === '/' ? 'active' : ''}`}>
+                    <Home size={16} />
+                    Home
+                </a>
+                <a href="/about/" class={`nav-link-base ${currentPath.includes('/about/') ? 'active' : ''}`}>
+                    <User size={16} />
+                    About
+                </a>
+                <a href="/cv/" class={`nav-link-base ${currentPath.includes('/cv/') ? 'active' : ''}`}>
+                    <FileText size={16} />
+                    CV
+                </a>
+                <a href="/testimonials/" class={`nav-link-base ${currentPath.includes('/testimonials/') ? 'active' : ''}`}>
+                    <MessageSquare size={16} />
+                    Testimonials
+                </a>
+                <a href="/blog/" class={`nav-link-base ${currentPath.includes('/blog/') ? 'active' : ''}`}>
+                    <BookOpen size={16} />
+                    Blog
+                </a>
+                <a href="/contact/" class={`nav-link-base ${currentPath.includes('/contact/') ? 'active' : ''}`}>
+                    <Mail size={16} />
+                    Contact
+                </a>
                 
                 <button id="theme-toggle" 
                         class="p-2 rounded-lg text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
                         aria-label="Toggle dark mode"
                         title="Toggle between light and dark theme">
-                    <span class="dark:hidden" aria-hidden="true">☀️</span>
-                    <span class="hidden dark:inline" aria-hidden="true">🌙</span>
+                    <Sun size={20} class="dark:hidden" />
+                    <Moon size={20} class="hidden dark:inline" />
                 </button>
             </div>
 
@@ -34,8 +55,8 @@ const currentPath = Astro.url.pathname;
                         class="p-2 rounded-lg text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
                         aria-label="Toggle dark mode"
                         title="Toggle between light and dark theme">
-                    <span class="dark:hidden" aria-hidden="true">☀️</span>
-                    <span class="hidden dark:inline" aria-hidden="true">🌙</span>
+                    <Sun size={20} class="dark:hidden" />
+                    <Moon size={20} class="hidden dark:inline" />
                 </button>
                 <button id="mobile-menu-button" 
                         class="p-2 rounded-lg text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
@@ -43,9 +64,7 @@ const currentPath = Astro.url.pathname;
                         aria-expanded="false"
                         aria-controls="mobile-menu"
                         title="Open navigation menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
+                    <Menu size={24} />
                 </button>
             </div>
         </div>
@@ -53,11 +72,30 @@ const currentPath = Astro.url.pathname;
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden pb-4" role="navigation" aria-label="Mobile navigation menu">
             <div class="flex flex-col space-y-2">
-                <a href="/" class={`nav-link ${currentPath === '/' ? 'active' : ''}`}>Home</a>
-                <a href="/about/" class={`nav-link ${currentPath.includes('/about/') ? 'active' : ''}`}>About</a>
-                <a href="/testimonials/" class={`nav-link ${currentPath.includes('/testimonials/') ? 'active' : ''}`}>Testimonials</a>
-                <a href="/blog/" class={`nav-link ${currentPath.includes('/blog/') ? 'active' : ''}`}>Blog</a>
-                <a href="/contact/" class={`nav-link ${currentPath.includes('/contact/') ? 'active' : ''}`}>Contact</a>
+                <a href="/" class={`nav-link-base ${currentPath === '/' ? 'active' : ''}`}>
+                    <Home size={16} />
+                    Home
+                </a>
+                <a href="/about/" class={`nav-link-base ${currentPath.includes('/about/') ? 'active' : ''}`}>
+                    <User size={16} />
+                    About
+                </a>
+                <a href="/cv/" class={`nav-link-base ${currentPath.includes('/cv/') ? 'active' : ''}`}>
+                    <FileText size={16} />
+                    CV
+                </a>
+                <a href="/testimonials/" class={`nav-link-base ${currentPath.includes('/testimonials/') ? 'active' : ''}`}>
+                    <MessageSquare size={16} />
+                    Testimonials
+                </a>
+                <a href="/blog/" class={`nav-link-base ${currentPath.includes('/blog/') ? 'active' : ''}`}>
+                    <BookOpen size={16} />
+                    Blog
+                </a>
+                <a href="/contact/" class={`nav-link-base ${currentPath.includes('/contact/') ? 'active' : ''}`}>
+                    <Mail size={16} />
+                    Contact
+                </a>
             </div>
         </div>
     </nav>

@@ -1,6 +1,9 @@
 ---
 import Layout from './Layout.astro';
-import { formatDate } from '../utils/date.js';
+import ConnectBlock from '../components/ConnectBlock.astro';
+import SkillTag from '../components/SkillTag.astro';
+import { formatDate } from '../utils/date.ts';
+import { personalInfo } from '../data/personal-info.ts';
 
 export interface Props {
   title: string;
@@ -18,7 +21,15 @@ export interface Props {
 const { title, description, pubDate, updatedDate, author, tags, image } = Astro.props;
 ---
 
-<Layout title={title} description={description}>
+<Layout 
+  title={title} 
+  description={description}
+  type="article"
+  publishedTime={pubDate.toISOString()}
+  modifiedTime={updatedDate?.toISOString()}
+  author={author}
+  image={image?.src}
+>
   <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Article Header -->
     <header class="mb-8">
@@ -57,9 +68,7 @@ const { title, description, pubDate, updatedDate, author, tags, image } = Astro.
       {tags.length > 0 && (
         <div class="flex flex-wrap gap-2 mb-8">
           {tags.map((tag) => (
-            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-sm">
-              #{tag}
-            </span>
+            <SkillTag variant="default" color="gray">#{tag}</SkillTag>
           ))}
         </div>
       )}
@@ -96,4 +105,7 @@ const { title, description, pubDate, updatedDate, author, tags, image } = Astro.
       </div>
     </footer>
   </article>
+
+  <!-- Connect Section -->
+  <ConnectBlock personalInfo={personalInfo} variant="compact" showTitle={true} />
 </Layout>
